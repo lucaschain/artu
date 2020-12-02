@@ -2,8 +2,6 @@
 title: Perguntas Frequentes
 ---
 
-# Perguntas frequentes
-
 ## Qual é a faixa etária alvo do projeto?
 
 Isso ainda é uma incógnita, sinto que a complexidade de criar um jogo pra crianças em fase de pré-alfabetização seria alta, dado que precisaríamos dedicar tempo em narrativa em voz e comunicação simples durante as interações com a criança, por isso, a idade mínima que estou propondo é 7 anos.
