@@ -16,4 +16,10 @@ Quando criança, brinquedos como _K'nex_ me fizeram descobrir que eu queria ser 
 
 Poucas crianças tem acesso à brinquedos criativos caros ou computadores, portanto, podem demorar anos (ou nem descobrir) o que esse mundo reserva.
 
-Não sou professor e não tenho conhecimento técnico em pedagogia, o Artú é um projeto que tenta trazer essa aproximação da criança com o universo da lógica e criação pra dar a oportunidade do conhecimento no momento da infância
+Não sou professor e não tenho conhecimento técnico em pedagogia, o Artú é um projeto que tenta trazer essa aproximação da criança com o universo da lógica e criação pra dar a oportunidade do conhecimento no momento da infância.
+
+## Por quê ainda não é possível doação de dinheiro?
+
+No momento atual do projeto, é mais interessante que consigamos finalizar a construção do livro e do jogo em suas versões iniciais, pra validar a ideia e coletar impressões de crianças e mentores interessados.
+
+Doações em dinheiro agora não terão utilidade, apenas gerariam trabalho pra fazer essa gestão, já que a complexidade é potencializada dado que queremos ter um processo de doação e gestão de fundos o mais transparente possível.
