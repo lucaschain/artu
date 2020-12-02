@@ -2,6 +2,7 @@
 title: Perguntas Frequentes
 ---
 
+# Perguntas frequentes
 
 ## Qual é a faixa etária alvo do projeto?
 
