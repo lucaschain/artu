@@ -1,8 +1,9 @@
 # Header
 menu:
   Principal: /
-  Arquivo: /archives
   "Perguntas Frequentes": /faq
+  Discord: "https://discord.gg/shA5ESyRbK"
+
 rss: /atom.xml
 
 # Content
@@ -10,7 +11,7 @@ excerpt_link: Ler Mais
 fancybox: true
 
 # Sidebar
-sidebar: bottom
+sidebar: false
 widgets:
 - category
 - tag
