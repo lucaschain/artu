@@ -1,7 +1,7 @@
 {
-  "name": "hexo-site",
-  "version": "0.0.0",
-  "private": true,
+  "name": "artu-institucional",
+  "version": "0.0.1",
+  "private": false,
   "scripts": {
     "build": "hexo generate",
     "clean": "hexo clean",
