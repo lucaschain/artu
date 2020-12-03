@@ -5,6 +5,7 @@ permalink: /
 ---
 
 Artú é um projeto social sem fins lucrativos feito pra mostrar o mundo da lógica de programação pras crianças de uma forma divertida, composto por uma história e um jogo.
+
 A missão principal desse projeto é estreitar o laço das crianças com o mundo da criatividade, inserindo alguns conceitos básicos da lógica de programação em uma história interativa.
 
 <!--more-->
