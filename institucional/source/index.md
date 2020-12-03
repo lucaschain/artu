@@ -9,7 +9,7 @@ A missão principal desse projeto é estreitar o laço das crianças com o mundo
 
 <!--more-->
 
-Na narrativa, Artú acorda anos depois de ter sido desligado pela última vez, agora, ele precisa da ajuda de pequenas mentes brilhantes pra conseguir reaprender suas habilidades e conquistar sua liberdade mundo afora. Ele funciona através de comandos, que a jogadora definirá como uma lista de receita, que depois é executada pelo nosso pequeno herói.
+Na narrativa, Artú é um robô que acorda anos depois de ter sido desligado pela última vez, agora, ele precisa da ajuda de pequenas mentes brilhantes pra conseguir reaprender suas habilidades e conquistar sua liberdade mundo afora. Ele funciona através de comandos, que a jogadora definirá como uma lista de receita, que depois é executada pelo nosso pequeno herói pra cumprir os objetivos e alcançar o fim da jornada.
 
 ## Responsabilidades do projeto
 
@@ -25,7 +25,7 @@ O projeto Artú tem três responsabilidades principais:
 
 ## Como você pode ajudar
 
-O projeto tá dando os primeiros passos agora, por isso, tem bastante coisa pra fazer! Montei uma lista de alguns exemplos de atividades seriam de grande ajuda:
+O projeto tá dando os primeiros passos agora, por isso, tem bastante coisa pra fazer! Montamos uma lista de alguns exemplos de atividades seriam de grande ajuda:
 
 - Desenvolvimento do jogo e protótipo;
 - Desenvolvimento do roteiro;
