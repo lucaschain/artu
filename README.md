@@ -4,4 +4,4 @@ Artú é um projeto social feito pra mostrar o mundo da lógica de programação
 
 A missão principal desse projeto é estreitar o laço das crianças com o mundo da criatividade, inserindo alguns conceitos básicos da lógica de programação em uma história interativa.
 
-Pra saber mais sobre o projeto, entre em https://www.artu.online
+Pra saber mais sobre o projeto, entre em https://artu.online
