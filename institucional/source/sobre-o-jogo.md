@@ -11,7 +11,7 @@ Essa lista de instruções deverá conter o passo-a-passo necessário para Artú
 
 O objetivo principal da jogadora será cumprir os níveis do jogo, que terão associação com os capítulos do livro que contém a narrativa detalhada.
 
-O jogo será disponibilizado gratuitamente pela internet, porém, nosso projeto também contempla a distribuição de equipamentos pra instiuições voltadas à atenção infantil. Os equipamentos distribuídos serão o suficiente pra criança conseguir jogar e ler a versão online do livro.
+O jogo será disponibilizado gratuitamente pela internet, porém, nosso projeto também contempla a distribuição de equipamentos pra instituições voltadas à atenção infantil. Os equipamentos distribuídos serão o suficiente pra criança conseguir jogar e ler a versão online do livro.
 
 Pra reduzir o custo hardware e logística, usaremos como computador, Raspberry PI, que é um computador que cabe na palma da mão, consome pouca energia e só depende de monitor, teclado e mouse pra ser usado:
 
