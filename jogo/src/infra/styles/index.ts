@@ -1,0 +1,5 @@
+import './normalize.css'
+import './entities/entity.css'
+import './entities/tile.css'
+import './entities/board.css'
+import './entities/hero.css'

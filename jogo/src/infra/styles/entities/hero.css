@@ -1,0 +1,27 @@
+.hero {
+  width: 30px;
+  height: 30px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background-color: white;
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.hero::before, .hero::after{
+  display: block;
+  content: ' ';
+  width: 5px;
+  height: 5px;
+  left: 60%;
+  position: absolute;
+  border-radius: 15px;
+  background-color: grey;
+}
+
+.hero::before {
+  top: 23%;
+}
+
+.hero::after {
+  top: 60%;
+}

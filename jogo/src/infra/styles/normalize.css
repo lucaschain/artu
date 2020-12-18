@@ -1,0 +1,10 @@
+html, body {
+  overflow: hidden;
+  background: black;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: 'Verdana'
+}
