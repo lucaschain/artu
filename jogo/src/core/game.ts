@@ -1,5 +1,5 @@
 import { Board } from './board'
-import { Hero } from './hero'
+import { Hero, Direction } from './hero'
 
 export default class Game {
 
@@ -9,6 +9,7 @@ export default class Game {
 
     setTimeout(async () => {
       await hero.moveTo({x: 1, y: 0})
+      await hero.rotateTo(Direction.Down)
       await hero.moveTo({x: 1, y: 1})
     }, 1000)
   }
