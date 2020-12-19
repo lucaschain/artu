@@ -1,16 +1,27 @@
 import { Board } from './board'
-import { Hero, Direction } from './hero'
+import { Hero } from './hero'
+import { InstructionFactory, RunInstructions } from './instruction'
 
 export default class Game {
+  private hero: Hero
 
-  async start() {
+  constructor() {
     const board = new Board(5, 5, [])
-    const hero = new Hero(board, {x: 0,y: 0})
+    this.hero = new Hero(board, {x: 0,y: 0})
+  }
 
+  start(): void {
+    const allInstructions = InstructionFactory(this.hero)
     setTimeout(async () => {
-      await hero.moveTo({x: 1, y: 0})
-      await hero.rotateTo(Direction.Down)
-      await hero.moveTo({x: 1, y: 1})
-    }, 1000)
+      await RunInstructions(allInstructions, [
+        'move', 'move', 'turn_right'
+      ])
+
+      await this.hero.reset()
+
+      await RunInstructions(allInstructions, [
+        'move', 'move', 'turn_right'
+      ])
+    }, 0)
   }
 }

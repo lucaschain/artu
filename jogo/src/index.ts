@@ -2,5 +2,5 @@ import './infra/styles'
 
 import Game from './core/game'
 
-
-new Game().start()
+const game = new Game()
+game.start()
