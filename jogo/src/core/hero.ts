@@ -1,7 +1,7 @@
 import { Vector, VectorSum } from '../math/vector'
 import { ToRadians } from '../math/rotation'
 import { Board } from './board'
-import { Hero as HeroEntity } from '../entities/hero'
+import { Hero as HeroEntity } from '../entity/hero'
 
 export class Hero {
   private entity: HeroEntity
@@ -24,8 +24,10 @@ export class Hero {
   }
 
   public async reset() {
-    this.rotateTo(0)
-    await this.moveTo({x: 0, y: 0})
+    await Promise.all([
+      this.rotateTo(0),
+      this.moveTo({x: 0, y: 0})
+    ])
   }
 
   public async moveForward() {
@@ -39,7 +41,7 @@ export class Hero {
   }
 
   private async rotate(direction: number) {
-    await this.entity.rotateTo(this.direction + direction)
+    await this.rotateTo(this.direction + direction)
   }
 
   private async rotateTo(direction: number) {
@@ -47,7 +49,8 @@ export class Hero {
     await this.entity.rotateTo(this.direction)
   }
   private async move(position: Vector) {
-    await this.moveTo(VectorSum(this.position, position))
+    const moveTo = VectorSum(this.position, position)
+    await this.moveTo(moveTo)
   }
 
   private async moveTo(position: Vector) {

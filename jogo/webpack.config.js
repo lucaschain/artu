@@ -9,6 +9,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.hbs$/,
+        loader: "handlebars-loader",
+      },
+      {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
@@ -16,11 +20,11 @@ module.exports = {
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
-      }
+      },
     ],
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js', '.css' ],
+    extensions: [ '.tsx', '.ts', '.js', '.css', '.handlebars' ],
   },
   output: {
     filename: 'bundle.js',

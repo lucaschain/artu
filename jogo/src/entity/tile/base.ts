@@ -1,7 +1,7 @@
 import { Vector } from '../../math/vector'
-import { EntityConfiguration, Base } from '../base'
+import { EntityConfiguration, Entity } from '../entity'
 
-export abstract class BaseTile extends Base {
+export abstract class BaseTile extends Entity {
   constructor(
     entityConfig: EntityConfiguration,
     protected size: number,

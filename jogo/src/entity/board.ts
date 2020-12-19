@@ -1,6 +1,6 @@
-import { Base } from './base'
+import { Entity } from './entity'
 
-export class Board extends Base {
+export class Board extends Entity {
   constructor(
     private width: number,
     private height: number,

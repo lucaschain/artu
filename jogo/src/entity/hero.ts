@@ -1,20 +1,20 @@
 import { AnimateElement, TransformRotate } from '../infra/motion'
 import { Vector } from '../math/vector'
-import { Base } from './base'
+import { Entity } from './entity'
 
-export class Hero extends Base {
+export class Hero extends Entity {
   constructor(
     private position: Vector,
   ) { super() }
 
   public async rotateTo(degrees: number) {
-    await TransformRotate(this.root, degrees, 200)
+    await TransformRotate(this.root, degrees, 230)
   }
 
   public async moveTo(position: Vector) {
     this.position = { ...position }
 
-    await AnimateElement(this.root, this.elementStyle, 200)
+    await AnimateElement(this.root, this.elementStyle, 230)
   }
 
   protected get elementClassList() { return ['hero'] }

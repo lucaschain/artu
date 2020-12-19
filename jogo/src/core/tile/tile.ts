@@ -1,7 +1,7 @@
 import { Vector } from '../../math/vector'
-import { Base } from '../../entities/base'
+import { Entity } from '../../entity'
 
-export abstract class BaseTile {
+export abstract class Tile {
   constructor(
     protected size: number,
     public readonly position: Vector,
@@ -12,5 +12,5 @@ export abstract class BaseTile {
     this.entity.spawn(parentElement)
   }
 
-  protected abstract entity: Base
+  protected abstract entity: Entity
 }

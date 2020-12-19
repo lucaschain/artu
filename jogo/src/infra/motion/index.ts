@@ -17,6 +17,7 @@ export const AnimateElement = async (element: HTMLElement, properties: Record<st
   }
 
   return new Promise((resolve) => {
-    setTimeout(() => { resolve(null) }, durationMs)
+    const animationTimeBufferMs = 30
+    setTimeout(() => { resolve(null) }, durationMs + animationTimeBufferMs)
   })
 }

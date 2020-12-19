@@ -1,0 +1,10 @@
+<strong>Instruções disponíveis</strong>
+<ul>
+  {{#each instructions}}
+    <li data-name="{{this.name}}">{{this.label}}</li>
+  {{/each}}
+</ul>
+<div class="controls">
+  <div class="control-button" id="run-instructions">&#x25b6;&#xfe0f;</div>
+  <div class="control-button" id="clear-instructions">&#x1f5d1;&#xfe0f;</div>
+</div>

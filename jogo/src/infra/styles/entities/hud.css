@@ -1,0 +1,46 @@
+.hud-panel {
+  background-color: grey;
+  user-select: none;
+  padding: 7px;
+}
+
+.instruction-panel {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 65px;
+}
+
+.instruction-panel ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.instruction-panel li {
+  display: inline-block;
+  margin: 5px;
+  padding: 5px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.instruction-list {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto 0;
+  max-height: 50%;
+}
+
+.instruction-list .controls {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.instruction-list .controls .control-button {
+  cursor: pointer;
+  display: inline-block;
+}

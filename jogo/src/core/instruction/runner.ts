@@ -2,15 +2,19 @@ import { Instruction } from './index'
 
 export const RunInstructions = async (
   availableInstructions: Instruction[],
-  instructionList: string[]
+  instructionList: string[],
+  shouldStop: () => boolean = () => false,
 ) => {
-    for (const instructionName of instructionList) {
-      const instruction = instructionByName(instructionName, availableInstructions)
-
-      if (instruction) {
-        await instruction.action()
-      }
+  for (const instructionName of instructionList) {
+    if (shouldStop()) {
+      break
     }
+    const instruction = instructionByName(instructionName, availableInstructions)
+
+    if (instruction) {
+      await instruction.action()
+    }
+  }
 }
 
 const instructionByName = (

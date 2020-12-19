@@ -1,6 +1,6 @@
 import { Div } from '../infra/dom'
 
-export abstract class Base {
+export class Entity {
   private _el: HTMLDivElement
   private _id: string
 

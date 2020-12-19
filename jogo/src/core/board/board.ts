@@ -1,8 +1,8 @@
 import { Vector } from '../../math/vector'
-import { BaseTile } from '../tile'
-import { Ground } from '../tile/types'
-import { Base as BaseEntity } from '../../entities/base'
-import { Board as BoardEntity } from '../../entities/board'
+import { Tile } from '../tile'
+import { Ground } from '../tile/type'
+import { Entity } from '../../entity'
+import { Board as BoardEntity } from '../../entity/board'
 
 export class Board {
   tileSize = 48
@@ -11,7 +11,7 @@ export class Board {
   constructor(
     private columns: number,
     private rows: number,
-    private tiles: BaseTile[],
+    private tiles: Tile[],
   ) {
     this.createBoardEntity()
     this.createTiles()
@@ -28,7 +28,7 @@ export class Board {
     }
   }
 
-  public append(entity: BaseEntity) {
+  public append(entity: Entity) {
     entity.spawn(this.entity.root)
   }
 
@@ -52,7 +52,7 @@ export class Board {
     this.entity.spawn()
   }
 
-  private tileAtPosition?(pos: Vector): BaseTile {
+  private tileAtPosition?(pos: Vector): Tile {
     return this.tiles.filter(tile => {
       return tile.position.x === pos.x && tile.position.y === pos.y
     })[0]
