@@ -17,8 +17,9 @@ export class Hero extends Entity {
     return AnimateElement(this.root, this.elementStyle, 230)
   }
 
-  public nudge(): Promise<void> {
-    return CustomAnimation(this.root, 'hero-nudge', 200)
+  public nudge(direction: number): Promise<void> {
+    const modDirection = (direction % 360).toString()
+    return CustomAnimation(this.root, `hero-nudge-${modDirection}`, 200)
   }
 
   protected get elementClassList() { return ['hero'] }

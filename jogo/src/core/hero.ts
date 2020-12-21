@@ -55,7 +55,7 @@ export class Hero {
 
   private async moveTo(position: Vector) {
     if (!this.board.isPositionWalkable(position)) {
-      return this.entity.nudge()
+      return this.entity.nudge(this.direction)
     }
 
     this.position = {...position}
