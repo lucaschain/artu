@@ -37,8 +37,8 @@ export default class Game {
   }
 
   private createHud(levelConfig: LevelConfiguration) {
-    const allInstructions = InstructionFactory(this.hero, levelConfig.availableInstructions)
-    const availableInstructionStore = new Store<Instruction[]>(allInstructions)
+    const availableInstructions = InstructionFactory(this.hero, levelConfig.availableInstructions)
+    const availableInstructionStore = new Store<Instruction[]>(availableInstructions)
     new InstructionPanel(
       {},
       availableInstructionStore,
@@ -49,7 +49,7 @@ export default class Game {
       async (instructionList) => {
         await this.restart()
         RunInstructions(
-          allInstructions,
+          availableInstructions,
           instructionList,
           () => this.shouldStop
         )
