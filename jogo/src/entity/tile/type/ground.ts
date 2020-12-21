@@ -1,8 +1,5 @@
-import { BaseTile } from '../base'
+import { Tile } from '../tile'
 
-export class Ground extends BaseTile {
-
-  get walkable(): boolean { return true }
-
+export class Ground extends Tile {
   protected get type(): string { return "ground" }
 }

@@ -27,3 +27,17 @@
 .hero::after {
   top: 60%;
 }
+
+@keyframes hero-nudge {
+  0% {
+    margin-left: -15px
+  }
+
+  50% {
+    margin-left: 0px
+  }
+
+  100% {
+    margin-left: -15px
+  }
+}

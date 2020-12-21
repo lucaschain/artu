@@ -8,6 +8,10 @@ export abstract class Tile {
     protected parentElement?: HTMLElement
   ) {}
 
+  public get walkable(): boolean {
+    return true
+  }
+
   create(parentElement?: HTMLElement): void {
     this.entity.spawn(parentElement)
   }

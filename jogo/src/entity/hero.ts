@@ -1,4 +1,4 @@
-import { AnimateElement, TransformRotate } from '../infra/motion'
+import { CustomAnimation, AnimateElement, TransformRotate } from '../infra/motion'
 import { Vector } from '../math/vector'
 import { Entity } from './entity'
 
@@ -7,14 +7,18 @@ export class Hero extends Entity {
     private position: Vector,
   ) { super() }
 
-  public async rotateTo(degrees: number) {
-    await TransformRotate(this.root, degrees, 230)
+  public rotateTo(degrees: number): Promise<void> {
+    return TransformRotate(this.root, degrees, 230)
   }
 
-  public async moveTo(position: Vector) {
+  public moveTo(position: Vector): Promise<void> {
     this.position = { ...position }
 
-    await AnimateElement(this.root, this.elementStyle, 230)
+    return AnimateElement(this.root, this.elementStyle, 230)
+  }
+
+  public nudge(): Promise<void> {
+    return CustomAnimation(this.root, 'hero-nudge', 200)
   }
 
   protected get elementClassList() { return ['hero'] }

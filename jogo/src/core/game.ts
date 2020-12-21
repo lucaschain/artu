@@ -19,17 +19,17 @@ export default class Game {
     this.createHud()
   }
 
-  private reset(): void {
+  private async reset() {
     this.shouldStop = true
-    this.hero.reset()
+    await this.hero.reset()
   }
 
   private clear(): void {
     this.instructionStore.update([])
   }
 
-  private restart(): void {
-    this.reset()
+  private async restart() {
+    await this.reset()
     this.shouldStop = false
   }
 
@@ -43,9 +43,13 @@ export default class Game {
     ).spawn()
 
     new InstructionList({}, this.instructionStore,
-      instructionList => {
-        this.restart()
-        RunInstructions(allInstructions, instructionList, () => this.shouldStop)
+      async (instructionList) => {
+        await this.restart()
+        RunInstructions(
+          allInstructions,
+          instructionList,
+          () => this.shouldStop
+        )
       },
       () => {
         this.reset()

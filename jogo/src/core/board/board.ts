@@ -32,6 +32,25 @@ export class Board {
     entity.spawn(this.entity.root)
   }
 
+  public isPositionWalkable(position: Vector): boolean {
+    if (!this.isPositionWithinBounds(position)) {
+      return false
+    }
+
+    const tileInPosition = this.tileAtPosition(position)
+
+    return (tileInPosition) ? tileInPosition.walkable : true
+  }
+
+  private isPositionWithinBounds(position: Vector): boolean {
+    if (position.x < 0) return false
+    if (position.y < 0) return false
+    if (position.x >= this.columns) return false
+    if (position.y >= this.rows) return false
+
+    return true
+  }
+
   private createTiles(): void {
     for (let x = 0; x < this.columns; x++) {
       for (let y = 0; y < this.rows; y++) {
