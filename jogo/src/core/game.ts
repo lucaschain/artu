@@ -1,3 +1,4 @@
+import { LevelConfiguration } from './level_configuration'
 import { Board } from './board'
 import { Hero } from './hero'
 import { Store } from '../infra/store'
@@ -10,13 +11,15 @@ export default class Game {
   private instructionStore = new Store<Instruction[]>([])
   private shouldStop = false
 
-  constructor() {
-    const board = new Board(5, 5, [])
-    this.hero = new Hero(board, {x: 0,y: 0})
-  }
+  loadLevel(levelConfig: LevelConfiguration): void {
+    const board = new Board(
+      levelConfig.width,
+      levelConfig.height,
+      levelConfig.tiles
+    )
 
-  start(): void {
-    this.createHud()
+    this.hero = new Hero(board, {x: 0,y: 0})
+    this.createHud(levelConfig)
   }
 
   private async reset() {
@@ -33,8 +36,8 @@ export default class Game {
     this.shouldStop = false
   }
 
-  private createHud() {
-    const allInstructions = InstructionFactory(this.hero)
+  private createHud(levelConfig: LevelConfiguration) {
+    const allInstructions = InstructionFactory(this.hero, levelConfig.availableInstructions)
     const availableInstructionStore = new Store<Instruction[]>(allInstructions)
     new InstructionPanel(
       {},

@@ -6,7 +6,10 @@ export type Instruction = {
   action: () => Promise<any>,
 }
 
-export const InstructionFactory = (hero: Hero): Instruction[] => {
+export const InstructionFactory = (hero: Hero, availableInstructions?: string[]): Instruction[] => {
+  const isAvailable = (instruction: Instruction) => availableInstructions.includes(instruction.name)
+  const filter = availableInstructions.length ? isAvailable : (_item: Instruction) => true
+
   return [
     {
       name: 'move',
@@ -23,7 +26,7 @@ export const InstructionFactory = (hero: Hero): Instruction[] => {
       label: 'Girar pra direita',
       action: () => hero.turnRight()
     },
-  ]
+  ].filter(filter)
 }
 
 export * from './runner'
