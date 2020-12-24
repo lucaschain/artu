@@ -1,3 +1,5 @@
+import { sleep } from '../../utils'
+
 const ANIMATION_BUFFER_MS = 30
 
 export const CustomAnimation = async (element: HTMLElement, animationName: string, durationMs: number = 200) => {
@@ -31,10 +33,4 @@ export const AnimateElement = async (element: HTMLElement, properties: Record<st
   }
 
   return sleep(durationMs + ANIMATION_BUFFER_MS)
-}
-
-const sleep = (timeMs: number): Promise<void> => {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(), timeMs)
-  })
 }

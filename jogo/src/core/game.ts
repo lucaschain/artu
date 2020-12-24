@@ -1,30 +1,61 @@
+import { Store } from '../infra/store'
+
+import { InstructionPanel } from '../entity/hud/instruction_panel'
+import { InstructionList } from '../entity/hud/instruction_list'
+
 import { LevelConfiguration } from './level_configuration'
 import { Board } from './board'
 import { Hero } from './hero'
-import { Store } from '../infra/store'
-import { InstructionPanel } from '../entity/hud/instruction_panel'
-import { InstructionList } from '../entity/hud/instruction_list'
 import { Instruction, InstructionFactory, RunInstructions } from './instruction'
 
-export default class Game {
+export class Game {
   private hero: Hero
+  private board: Board
   private instructionStore = new Store<Instruction[]>([])
   private shouldStop = false
+  private isRunning = false
+  private levelList: LevelConfiguration[] = []
+  private currentLevel: number = 0
+  private instructionPanel: InstructionPanel
+  private instructionList: InstructionList
 
-  loadLevel(levelConfig: LevelConfiguration): void {
-    const board = new Board(
+  public loadLevel(levelConfig: LevelConfiguration): void {
+    this.board = new Board(
       levelConfig.width,
       levelConfig.height,
       levelConfig.tiles
     )
 
-    this.hero = new Hero(board, {x: 0,y: 0})
+    this.hero = new Hero(this.board, {x: 0,y: 0})
     this.createHud(levelConfig)
+  }
+
+  public async nextLevel() {
+    const nextLevel = this.currentLevel + 1
+    const nextLevelExists = nextLevel < this.levelList.length
+    if (nextLevelExists) {
+      this.currentLevel = nextLevel
+      await this.unloadLevel()
+      this.loadLevel(this.levelList[this.currentLevel])
+    }
+  }
+
+  public registerLevels(...levels: LevelConfiguration[]): void {
+    this.levelList.push(...levels)
+  }
+
+  private async unloadLevel() {
+    this.clear()
+    this.reset()
+    this.instructionList.destroy()
+    this.instructionPanel.destroy()
+    this.board.destroy()
   }
 
   private async reset() {
     this.shouldStop = true
     await this.hero.reset()
+    this.board.reset()
   }
 
   private clear(): void {
@@ -39,25 +70,42 @@ export default class Game {
   private createHud(levelConfig: LevelConfiguration) {
     const availableInstructions = InstructionFactory(this.hero, levelConfig.availableInstructions)
     const availableInstructionStore = new Store<Instruction[]>(availableInstructions)
-    new InstructionPanel(
-      {},
+
+    this.instructionPanel = new InstructionPanel(
       availableInstructionStore,
       this.instructionStore
-    ).spawn()
+    )
+    this.instructionPanel.spawn()
 
-    new InstructionList({}, this.instructionStore,
+    this.instructionList = new InstructionList(this.instructionStore,
       async (instructionList) => {
+        if (this.isRunning) {
+          return
+        }
+        this.isRunning = true
+
         await this.restart()
-        RunInstructions(
+        await RunInstructions(
           availableInstructions,
           instructionList,
           () => this.shouldStop
         )
+
+        this.isRunning = false
       },
       () => {
         this.reset()
         this.clear()
       }
-    ).spawn()
+    )
+    this.instructionList.spawn()
   }
+}
+
+let gameInstance: Game
+export const GameInstance = (): Game => {
+  if (!gameInstance) {
+    gameInstance = new Game()
+  }
+  return gameInstance
 }

@@ -3,18 +3,21 @@ import { Entity } from '../../entity'
 
 export abstract class Tile {
   constructor(
-    protected size: number,
     public readonly position: Vector,
-    protected parentElement?: HTMLElement
+    public readonly id: string = "",
   ) {}
 
   public get walkable(): boolean {
     return true
   }
 
-  create(parentElement?: HTMLElement): void {
-    this.entity.spawn(parentElement)
+  public create(): void {
+    this.entity.spawn()
   }
+
+  public onHeroEvent(_eventName: string, _eventParams: Record<string, string>) {}
+
+  public reset() {}
 
   protected abstract entity: Entity
 }

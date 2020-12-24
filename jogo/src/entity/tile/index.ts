@@ -1,2 +1,5 @@
 export * from './tile'
 export * from './type/ground'
+export * from './type/goal'
+export * from './type/block'
+export * from './type/gate'

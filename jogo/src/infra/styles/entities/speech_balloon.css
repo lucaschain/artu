@@ -1,0 +1,19 @@
+.speech-balloon {
+  color: black;
+  background-color: white;
+  padding: 5px;
+  transform: translate(-50%, -90%);
+  border: 1px solid #c0c0c0;
+  border-radius: 4px;
+  animation: 'speech-appear' 180ms;
+}
+
+@keyframes speech-appear {
+  0% {
+    opacity: 0
+  }
+
+  100% {
+    opacity: 0.6
+  }
+}

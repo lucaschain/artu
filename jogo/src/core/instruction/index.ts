@@ -26,6 +26,11 @@ export const InstructionFactory = (hero: Hero, availableInstructions?: string[])
       label: 'Girar pra direita',
       action: () => hero.turnRight()
     },
+    {
+      name: 'say_yes',
+      label: 'Dizer sim',
+      action: () => hero.sayYes()
+    },
   ].filter(filter)
 }
 

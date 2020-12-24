@@ -28,10 +28,6 @@ export class Board {
     }
   }
 
-  public append(entity: Entity) {
-    entity.spawn(this.entity.root)
-  }
-
   public isPositionWalkable(position: Vector): boolean {
     if (!this.isPositionWithinBounds(position)) {
       return false
@@ -40,6 +36,28 @@ export class Board {
     const tileInPosition = this.tileAtPosition(position)
 
     return (tileInPosition) ? tileInPosition.walkable : true
+  }
+
+  public dispatchHeroEvent(
+    eventName: string,
+    eventParams: Record<string, string>,
+    position: Vector
+  ) {
+    const tile = this.tileAtPosition(position)
+
+    tile && tile.onHeroEvent(eventName, eventParams)
+  }
+
+  public destroy() {
+    this.entity.destroy()
+  }
+
+  public tileById?(id: string): Tile {
+    return this.tiles.filter(tile => tile.id === id)[0]
+  }
+
+  public reset() {
+    this.tiles.forEach(tile => tile.reset())
   }
 
   private isPositionWithinBounds(position: Vector): boolean {
@@ -55,10 +73,10 @@ export class Board {
     for (let x = 0; x < this.columns; x++) {
       for (let y = 0; y < this.rows; y++) {
         let tile = (
-          this.tileAtPosition({x, y}) || new Ground(this.tileSize, { x, y })
+          this.tileAtPosition({x, y}) || new Ground({ x, y })
         )
 
-        tile.create(this.entity.root)
+        tile.create()
       }
     }
   }

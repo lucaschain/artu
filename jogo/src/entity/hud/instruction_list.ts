@@ -1,7 +1,6 @@
 import { Instruction } from './../../core/instruction'
 import { Component } from './component'
 import { Store } from '.././../infra/store'
-import { EntityConfiguration } from '../entity'
 import * as template from './template/instruction_list.hbs'
 
 type RunInstructionsCallback = (instructionList: string[]) => void
@@ -11,12 +10,11 @@ export class InstructionList extends Component<Instruction[]> {
   protected get elementClassList(): string[] { return ['hud-panel', 'instruction-list'] }
 
   constructor(
-    config: EntityConfiguration,
     store: Store<Instruction[]>,
     private runInstructionsCallback: RunInstructionsCallback = (list: string[]) => {},
     private clearInstructionsCallback: ClearInstructionsCallback = () => {},
   ) {
-    super(config, store)
+    super(store)
   }
 
   render(state: Instruction[]): string {

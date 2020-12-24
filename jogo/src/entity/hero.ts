@@ -14,7 +14,7 @@ export class Hero extends Entity {
   public moveTo(position: Vector): Promise<void> {
     this.position = { ...position }
 
-    return AnimateElement(this.root, this.elementStyle, 230)
+    return AnimateElement(this.root, this.elementStyle(), 230)
   }
 
   public nudge(direction: number): Promise<void> {
@@ -24,10 +24,14 @@ export class Hero extends Entity {
 
   protected get elementClassList() { return ['hero'] }
 
-  protected get elementStyle() {
+  protected elementStyle() {
     return {
       left: `${this.position.x}px`,
       top: `${this.position.y}px`
     }
+  }
+
+  protected get parentElement(): HTMLElement {
+    return document.querySelector('.board') as HTMLElement
   }
 }

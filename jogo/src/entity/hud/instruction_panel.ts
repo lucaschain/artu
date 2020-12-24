@@ -1,16 +1,14 @@
 import { Instruction } from './../../core/instruction'
 import { Store } from '../../infra/store'
-import { EntityConfiguration } from '../entity'
 import { Component } from './component'
 import * as template from './template/instruction_panel.hbs'
 
 export class InstructionPanel extends Component<Instruction[]> {
   constructor(
-    config: EntityConfiguration,
     private availableInstructionStore: Store<Instruction[]>,
     private instructionStore: Store<Instruction[]>,
   ) {
-    super(config, availableInstructionStore)
+    super(availableInstructionStore)
   }
 
   render(state: Instruction[]): string {

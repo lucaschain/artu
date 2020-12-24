@@ -1,8 +1,10 @@
 import './infra/styles'
 
-import Game from './core/game'
+import { GameInstance }  from './core/game'
 import { LevelList } from './levels'
 
-const game = new Game()
+const game = GameInstance()
+
+game.registerLevels(...LevelList)
 
 game.loadLevel(LevelList[0])

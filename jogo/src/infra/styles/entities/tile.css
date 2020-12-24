@@ -2,3 +2,30 @@
   background-color: #4976f2;
   border: 1px solid #2926d2;
 }
+
+.tile--goal {
+  background: #a2f1c0;
+}
+
+.tile--block {
+  background: black;
+  border-color: black;
+}
+
+.tile--gate::after {
+  content: ' ';
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  height: 20%;
+  display: block;
+  transition: width ease-out 220ms;
+  background: #2926d2;
+}
+
+.tile--gate.open::after {
+  width: 10%;
+}

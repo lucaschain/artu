@@ -1,7 +1,10 @@
+import { sleep } from '../utils'
 import { Vector, VectorSum } from '../math/vector'
 import { ToRadians } from '../math/rotation'
 import { Board } from './board'
 import { Hero as HeroEntity } from '../entity/hero'
+import { BoardEvents } from './board'
+import { SpeechBalloon } from '../entity/speech_balloon'
 
 export class Hero {
   private entity: HeroEntity
@@ -12,7 +15,17 @@ export class Hero {
       this.realPosition
     )
 
-    this.board.append(this.entity)
+    this.entity.spawn()
+  }
+
+  public async sayYes() {
+    await sleep(200)
+    this.say("Sim")
+  }
+
+  private say(message: string) {
+    new SpeechBalloon(this.realPosition, message).spawn()
+    this.dispatchEventToBoard(BoardEvents.Say, { message })
   }
 
   public async turnLeft() {
@@ -38,6 +51,7 @@ export class Hero {
     }
 
     await this.move(movement)
+    this.dispatchEventToBoard(BoardEvents.StepIn)
   }
 
   private async rotate(direction: number) {
@@ -65,5 +79,12 @@ export class Hero {
 
   private get realPosition() {
     return this.board.realPositionFor(this.position)
+  }
+
+  private dispatchEventToBoard(
+    eventName: string,
+    eventParams: Record<string, string> = {},
+  ) {
+    this.board.dispatchHeroEvent(eventName, eventParams, this.position)
   }
 }

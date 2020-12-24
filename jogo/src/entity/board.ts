@@ -8,7 +8,7 @@ export class Board extends Entity {
 
   protected get elementClassList() { return ['board'] }
 
-  protected get elementStyle() {
+  protected elementStyle() {
     return {
       width: `${this.width}px`,
       height: `${this.height}px`

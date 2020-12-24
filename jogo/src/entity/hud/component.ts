@@ -1,9 +1,9 @@
-import { Entity, EntityConfiguration} from '../entity'
+import { Entity } from '../entity'
 import { Store } from '../../infra/store'
 
 export abstract class Component<T> extends Entity {
-  constructor(config: EntityConfiguration, protected store: Store<T>) {
-    super(config)
+  constructor(protected store: Store<T>) {
+    super()
 
     this.store.listen((newState: T, oldState: T) => {
       this.update(newState, oldState)
