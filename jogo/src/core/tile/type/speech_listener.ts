@@ -3,6 +3,7 @@ import { Tile } from '../tile'
 import { Gate } from './gate'
 import { Board, BoardEvents } from '../../board'
 import { Entity } from '../../../entity'
+import { SpeechBalloon } from '../../../entity/speech_balloon'
 import { SpeechListener as SpeechListenerEntity } from '../../../entity/tile'
 
 export class SpeechListener extends Tile {
@@ -13,6 +14,16 @@ export class SpeechListener extends Tile {
     private readonly gateName: string,
   ) {
     super(position, "")
+  }
+
+  create(): void {
+    super.create()
+
+    new SpeechBalloon(
+      this.realPosition,
+      this.question,
+      0
+    ).spawn()
   }
 
   protected createEntity(): Entity {

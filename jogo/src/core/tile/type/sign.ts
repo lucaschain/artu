@@ -3,6 +3,7 @@ import { Tile } from '../tile'
 import { Entity } from '../../../entity'
 import { Sign as SignEntity } from '../../../entity/tile'
 import { MemoryShard } from '../../memory'
+import { SpeechBalloon } from '../../../entity/speech_balloon'
 
 export class Sign extends Tile {
   constructor(
@@ -12,6 +13,16 @@ export class Sign extends Tile {
     super(position, "")
   }
 
+  create(): void {
+    super.create()
+
+    new SpeechBalloon(
+      this.realPosition,
+      this.shard.toString(),
+      0
+    ).spawn()
+  }
+
   public get shard(): MemoryShard {
     return this.content
   }
@@ -19,6 +30,4 @@ export class Sign extends Tile {
   protected createEntity(): Entity {
     return new SignEntity(this.position)
   }
-
-
 }

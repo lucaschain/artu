@@ -1,6 +1,6 @@
 import { Vector } from '../../math/vector'
 import { Entity } from '../../entity'
-import { Board } from '../board'
+import { Board, RealPositionFor } from '../board'
 import { MemoryShard } from '../memory'
 
 export abstract class Tile {
@@ -40,4 +40,8 @@ export abstract class Tile {
   }
 
   protected abstract createEntity(): Entity
+
+  protected get realPosition(): Vector {
+    return RealPositionFor(this.position, 65)
+  }
 }

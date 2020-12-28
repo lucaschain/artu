@@ -26,13 +26,11 @@ export class Hero {
   }
 
   public async sayYes() {
-    await sleep(200)
-    this.say("sim")
+    await this.say("sim")
   }
 
   public async sayNo() {
-    await sleep(200)
-    this.say("não")
+    await this.say("não")
   }
 
   public async turnLeft() {
@@ -65,12 +63,11 @@ export class Hero {
   public async read() {
     const shard = this.board.shardInPosition(this.position)
 
-    await sleep(200)
     if (shard != null) {
       this.memory.push(shard)
-      this.say("...")
+      await this.say("...")
     } else {
-      this.say("?")
+      await this.say("?")
     }
   }
 
@@ -78,28 +75,28 @@ export class Hero {
     const shard = this.memory.pop()
 
     if (shard != null) {
-      this.say(shard.toString())
+      await this.say(shard.toString())
     } else {
-      this.say("?")
+      await this.say("?")
     }
   }
 
   public async sum() {
-    const num = this.readShardAsNumber()
+    const num = await this.readShardAsNumber()
     await this.sumMemory(num)
   }
 
   public async subtract() {
-    const num = this.readShardAsNumber()
+    const num = await this.readShardAsNumber()
     await this.sumMemory(-num)
   }
 
-  private readShardAsNumber?(): number {
+  private async readShardAsNumber?(): Promise<number> {
     const shard = this.board.shardInPosition(this.position)
 
     if (typeof shard !== "number") {
-      this.say("?")
-      return
+      await this.say("?")
+      return 0
     }
 
     return shard
@@ -108,15 +105,16 @@ export class Hero {
   private async sumMemory(num: number) {
     const success = this.memory.sum(num)
     if (!success) {
-      this.say("?")
+      await this.say("?")
     } else {
       const numStr = num > 0 ? `+${num}` : num.toString()
-      this.say(numStr)
+      await this.say(numStr)
     }
   }
 
-  private say(message: string) {
-    new SpeechBalloon(this.realPosition, message).spawn()
+  private async say(message: string) {
+    await sleep(180)
+    new SpeechBalloon(this.realPosition, message, 3000, true).spawn()
     this.dispatchEventToBoard(BoardEvents.Say, { message })
   }
 

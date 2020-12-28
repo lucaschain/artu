@@ -6,6 +6,7 @@ export class SpeechBalloon extends Entity {
     private position: Vector,
     private text: string,
     durationMs: number = 3000,
+    private priority: boolean = false
   ) {
     super()
     if (durationMs) {
@@ -28,7 +29,13 @@ export class SpeechBalloon extends Entity {
   }
 
   protected get elementClassList() {
-    return ['speech-balloon']
+    let classes = ['speech-balloon']
+
+    if (this.priority) {
+      classes.push("priority")
+    }
+
+    return classes
   }
 
   protected get parentElement(): HTMLElement {

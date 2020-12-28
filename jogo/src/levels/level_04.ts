@@ -12,7 +12,7 @@ export const Level04: LevelConfiguration = {
     new Sign({x: 3, y: 0}, 5),
     new SpeechListener(
       {x: 4, y: 0},
-      "1 + 2 - 5?",
+      "1 + 2 - 5 dá quanto?",
       "-2",
       "gate-0",
     ),

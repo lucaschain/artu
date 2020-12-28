@@ -5,7 +5,7 @@ import { Board as BoardEntity } from '../../entity/board'
 import { MemoryShard } from '../memory'
 
 export class Board {
-  tileSize = 48
+  tileSize = 65
   private entity: BoardEntity
 
   constructor(
@@ -18,14 +18,10 @@ export class Board {
   }
 
   public realPositionFor(tilePos: Vector): Vector {
-    const origin = { x: 0.5, y: 0.5 }
-
-    const xPos = tilePos.x * this.tileSize
-    const yPos = tilePos.y * this.tileSize
-    return {
-      x: xPos + this.tileSize * origin.x,
-      y: yPos + this.tileSize * origin.y,
-    }
+    return RealPositionFor(
+      tilePos,
+      this.tileSize
+    )
   }
 
   public isPositionWalkable(position: Vector): boolean {
@@ -102,5 +98,18 @@ export class Board {
     return this.tiles.filter(tile => {
       return tile.position.x === pos.x && tile.position.y === pos.y
     })[0]
+  }
+}
+
+export const RealPositionFor = (
+  tilePos: Vector,
+  tileSize: number,
+  origin: Vector = { x: 0.5, y: 0.5 },
+): Vector => {
+  const xPos = tilePos.x * tileSize
+  const yPos = tilePos.y * tileSize
+  return {
+    x: xPos + tileSize * origin.x,
+    y: yPos + tileSize * origin.y,
   }
 }

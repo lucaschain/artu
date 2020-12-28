@@ -2,7 +2,7 @@ import { Vector } from '../../math/vector'
 import { Entity } from '../entity'
 
 export abstract class Tile extends Entity {
-  protected size = 48
+  protected size = 65
 
   constructor(protected position: Vector) {
     super()
