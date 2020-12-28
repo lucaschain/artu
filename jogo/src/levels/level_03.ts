@@ -1,13 +1,19 @@
 import { LevelConfiguration } from '../core/level_configuration'
-import { Gate, Goal } from '../core/tile/type'
+import { SpeechListener, Gate, Goal } from '../core/tile/type'
 
 export const Level03: LevelConfiguration = {
   name: 'level_03',
-  availableInstructions: ['move', 'turn_right'],
+  availableInstructions: ['move', 'say_yes'],
   width: 4,
   height: 1,
   tiles: [
-    new Gate({x: 2, y: 0}),
+    new SpeechListener(
+      {x: 1, y: 0},
+      "Você é um humano?",
+      "sim",
+      "gate-0",
+    ),
+    new Gate({x: 2, y: 0}, "gate-0"),
     new Goal({x: 3, y: 0})
   ]
 }

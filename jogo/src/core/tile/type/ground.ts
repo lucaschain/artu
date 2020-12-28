@@ -3,7 +3,7 @@ import { Entity } from '../../../entity'
 import { Ground as GroundEntity } from '../../../entity/tile'
 
 export class Ground extends Tile {
-  protected get entity(): Entity {
+  protected createEntity(): Entity {
     return new GroundEntity(this.position)
   }
 }

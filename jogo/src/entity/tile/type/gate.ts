@@ -8,14 +8,12 @@ export class Gate extends Tile {
     private orientation: string = "vertical"
   ) { super(position) }
 
-  public open(): Promise<void> {
+  public open() {
     this.root.classList.add("open")
-    return sleep(100)
   }
 
-  public close(): Promise<void> {
+  public close() {
     this.root.classList.remove("open")
-    return sleep(100)
   }
 
   protected elementStyle(): Record<string, string> {

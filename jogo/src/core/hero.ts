@@ -5,27 +5,34 @@ import { Board } from './board'
 import { Hero as HeroEntity } from '../entity/hero'
 import { BoardEvents } from './board'
 import { SpeechBalloon } from '../entity/speech_balloon'
+import { MemoryShard, Memory } from './memory'
+import { Store } from '../infra/store'
 
 export class Hero {
   private entity: HeroEntity
   private direction: number = 0
+  private memory: Memory
 
-  constructor(private board: Board, private position: Vector) {
+  constructor(
+    private board: Board,
+    private position: Vector,
+    memoryStore: Store<MemoryShard[]>,
+  ) {
     this.entity = new HeroEntity(
       this.realPosition
     )
-
+    this.memory = new Memory(memoryStore)
     this.entity.spawn()
   }
 
   public async sayYes() {
     await sleep(200)
-    this.say("Sim")
+    this.say("sim")
   }
 
-  private say(message: string) {
-    new SpeechBalloon(this.realPosition, message).spawn()
-    this.dispatchEventToBoard(BoardEvents.Say, { message })
+  public async sayNo() {
+    await sleep(200)
+    this.say("não")
   }
 
   public async turnLeft() {
@@ -37,6 +44,7 @@ export class Hero {
   }
 
   public async reset() {
+    this.memory.reset()
     await Promise.all([
       this.rotateTo(0),
       this.moveTo({x: 0, y: 0})
@@ -52,6 +60,64 @@ export class Hero {
 
     await this.move(movement)
     this.dispatchEventToBoard(BoardEvents.StepIn)
+  }
+
+  public async read() {
+    const shard = this.board.shardInPosition(this.position)
+
+    await sleep(200)
+    if (shard != null) {
+      this.memory.push(shard)
+      this.say("...")
+    } else {
+      this.say("?")
+    }
+  }
+
+  public async sayMemory() {
+    const shard = this.memory.pop()
+
+    if (shard != null) {
+      this.say(shard.toString())
+    } else {
+      this.say("?")
+    }
+  }
+
+  public async sum() {
+    const num = this.readShardAsNumber()
+    await this.sumMemory(num)
+  }
+
+  public async subtract() {
+    const num = this.readShardAsNumber()
+    await this.sumMemory(-num)
+  }
+
+  private readShardAsNumber?(): number {
+    const shard = this.board.shardInPosition(this.position)
+
+    if (typeof shard !== "number") {
+      this.say("?")
+      return
+    }
+
+    return shard
+  }
+
+  private async sumMemory(num: number) {
+    const success = this.memory.sum(num)
+    if (!success) {
+      this.say("?")
+    } else {
+      const numStr = num > 0 ? `+${num}` : num.toString()
+      this.say(numStr)
+    }
+  }
+
+  private say(message: string) {
+    new SpeechBalloon(this.realPosition, message).spawn()
+    this.dispatchEventToBoard(BoardEvents.Say, { message })
   }
 
   private async rotate(direction: number) {

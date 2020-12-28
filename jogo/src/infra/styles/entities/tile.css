@@ -29,3 +29,33 @@
 .tile--gate.open::after {
   width: 10%;
 }
+
+.tile--speech-listener::after {
+  content: ' ';
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 50%;
+  bottom: 0;
+  height: 50%;
+  display: block;
+  background: #a2f1c0;
+  border-radius: 100%;
+}
+
+.tile--sign::after {
+  content: ' ';
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 50%;
+  bottom: 0;
+  height: 50%;
+  display: block;
+  border: 1px solid #101010;
+  background: #819010;
+}

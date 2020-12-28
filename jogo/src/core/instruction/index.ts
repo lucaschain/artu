@@ -31,6 +31,31 @@ export const InstructionFactory = (hero: Hero, availableInstructions?: string[])
       label: 'Dizer sim',
       action: () => hero.sayYes()
     },
+    {
+      name: 'say_no',
+      label: 'Dizer não',
+      action: () => hero.sayYes()
+    },
+    {
+      name: 'read',
+      label: 'Ler',
+      action: () => hero.read()
+    },
+    {
+      name: 'say_memory',
+      label: 'Falar',
+      action: () => hero.sayMemory()
+    },
+    {
+      name: 'sum',
+      label: 'Somar',
+      action: () => hero.sum()
+    },
+    {
+      name: 'subtract',
+      label: 'Subtrair',
+      action: () => hero.subtract()
+    },
   ].filter(filter)
 }
 

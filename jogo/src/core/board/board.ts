@@ -1,8 +1,8 @@
 import { Vector } from '../../math/vector'
 import { Tile } from '../tile'
 import { Ground } from '../tile/type'
-import { Entity } from '../../entity'
 import { Board as BoardEntity } from '../../entity/board'
+import { MemoryShard } from '../memory'
 
 export class Board {
   tileSize = 48
@@ -38,6 +38,16 @@ export class Board {
     return (tileInPosition) ? tileInPosition.walkable : true
   }
 
+  public shardInPosition(position: Vector): MemoryShard {
+    const tile = this.tileAtPosition(position)
+
+    if (!tile) {
+      return null
+    }
+
+    return tile.shard
+  }
+
   public dispatchHeroEvent(
     eventName: string,
     eventParams: Record<string, string>,
@@ -45,7 +55,7 @@ export class Board {
   ) {
     const tile = this.tileAtPosition(position)
 
-    tile && tile.onHeroEvent(eventName, eventParams)
+    tile && tile.onHeroEvent(eventName, eventParams, this)
   }
 
   public destroy() {
@@ -75,7 +85,6 @@ export class Board {
         let tile = (
           this.tileAtPosition({x, y}) || new Ground({ x, y })
         )
-
         tile.create()
       }
     }

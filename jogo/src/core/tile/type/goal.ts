@@ -5,7 +5,7 @@ import { Goal as GoalEntity } from '../../../entity/tile'
 import { GameInstance }  from '../../game'
 
 export class Goal extends Tile {
-  protected get entity(): Entity {
+  protected createEntity(): Entity {
     return new GoalEntity(this.position)
   }
 

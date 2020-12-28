@@ -7,7 +7,7 @@ export class Block extends Tile {
     return false
   }
 
-  protected get entity(): Entity {
+  protected createEntity(): Entity {
     return new BlockEntity(this.position)
   }
 }

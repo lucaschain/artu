@@ -1,16 +1,17 @@
 import { Tile } from '../tile'
-import { Entity } from '../../../entity'
 import { Gate as GateEntity } from '../../../entity/tile'
 
 export class Gate extends Tile {
   private isOpen = false
 
-  public open() {
+  public async open() {
     this.isOpen = true
+    this.gateEntity.open()
   }
 
-  public close() {
+  public async close() {
     this.isOpen = false
+    this.gateEntity.close()
   }
 
   public reset() {
@@ -21,7 +22,11 @@ export class Gate extends Tile {
     return this.isOpen
   }
 
-  protected get entity(): Entity {
+  protected createEntity(): GateEntity {
     return new GateEntity(this.position)
+  }
+
+  private get gateEntity(): GateEntity {
+    return this.entity as GateEntity
   }
 }
