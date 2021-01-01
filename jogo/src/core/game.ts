@@ -3,6 +3,7 @@ import { Store } from '../infra/store'
 import { InstructionPanel } from '../entity/hud/instruction_panel'
 import { InstructionList } from '../entity/hud/instruction_list'
 import { MemoryList } from '../entity/hud/memory_list'
+import { ScorePanel } from '../entity/hud/score_panel'
 
 import { MemoryShard } from './memory'
 import { LevelConfiguration } from './level_configuration'
@@ -15,10 +16,12 @@ export class Game {
   private board: Board
   private instructionStore = new Store<Instruction[]>([])
   private memoryStore = new Store<MemoryShard[]>([])
+  private scoreStore = new Store<number>(0)
   private shouldStop = false
   private isRunning = false
   private levelList: LevelConfiguration[] = []
   private currentLevel: number = 0
+  private scorePanel: ScorePanel
   private instructionPanel: InstructionPanel
   private instructionList: InstructionList
   private memoryList: MemoryList
@@ -44,6 +47,11 @@ export class Game {
     }
   }
 
+  public increaseScore(amount = 1) {
+    const currentScore = this.scoreStore.current
+    this.scoreStore.update(currentScore + amount)
+  }
+
   public registerLevels(...levels: LevelConfiguration[]): void {
     this.levelList.push(...levels)
   }
@@ -59,6 +67,7 @@ export class Game {
 
   private async reset() {
     this.shouldStop = true
+    this.scoreStore.update(0)
     await this.hero.reset()
     this.board.reset()
   }
@@ -84,6 +93,9 @@ export class Game {
 
     this.memoryList = new MemoryList(this.memoryStore)
     this.memoryList.spawn()
+
+    this.scorePanel = new ScorePanel(this.scoreStore)
+    this.scorePanel.spawn()
 
     this.instructionList = new InstructionList(this.instructionStore,
       async (instructionList) => {

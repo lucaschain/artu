@@ -59,3 +59,24 @@
   border: 1px solid #101010;
   background: #819010;
 }
+
+.tile--friend::after {
+  content: ' ';
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 30%;
+  bottom: 0;
+  height: 70%;
+  display: block;
+  background: #f3c1c2;
+  border-radius: 100%;
+  transition: opacity ease-out 300ms;
+  opacity: 1;
+}
+
+.tile--friend.caught::after {
+  opacity: 0;
+}

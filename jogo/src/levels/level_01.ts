@@ -3,7 +3,7 @@ import { Goal } from '../core/tile/type'
 
 export const Level01: LevelConfiguration = {
   name: 'level_01',
-  availableInstructions: ['move', 'say_yes'],
+  availableInstructions: ['move'],
   width: 3,
   height: 1,
   tiles: [
