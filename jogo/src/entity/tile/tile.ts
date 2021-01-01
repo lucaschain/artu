@@ -1,14 +1,16 @@
 import { Vector } from '../../math/vector'
 import { Entity } from '../entity'
 
-export abstract class Tile extends Entity {
+export class Tile extends Entity {
   protected size = 65
 
-  constructor(protected position: Vector) {
-    super()
+  constructor(protected position: Vector, protected _type: string) {
+    super("tile")
   }
 
-  protected abstract get type(): string
+  protected get type(): string {
+    return this._type
+  }
 
   protected get parentElement(): HTMLElement {
     return document.querySelector('.board')
@@ -26,7 +28,7 @@ export abstract class Tile extends Entity {
     }
   }
 
-  protected get elementClassList() {
-    return ["tile", `tile--${this.type}`]
+  protected get additionalElementClassList() {
+    return [`tile--${this.type}`]
   }
 }

@@ -1,7 +1,7 @@
 import { Vector } from '../../../math/vector'
 import { Tile } from '../tile'
 import { Entity } from '../../../entity'
-import { Sign as SignEntity } from '../../../entity/tile'
+import { Tile as SignEntity } from '../../../entity/tile'
 import { MemoryShard } from '../../memory'
 import { SpeechBalloon } from '../../../entity/speech_balloon'
 
@@ -28,6 +28,6 @@ export class Sign extends Tile {
   }
 
   protected createEntity(): Entity {
-    return new SignEntity(this.position)
+    return new SignEntity(this.position, "sign")
   }
 }

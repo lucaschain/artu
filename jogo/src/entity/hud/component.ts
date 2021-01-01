@@ -3,7 +3,7 @@ import { Store } from '../../infra/store'
 
 export abstract class Component<T> extends Entity {
   constructor(protected store: Store<T>) {
-    super()
+    super("hud")
 
     this.store.listen((newState: T, oldState: T) => {
       this.update(newState, oldState)

@@ -8,7 +8,7 @@ export class SpeechBalloon extends Entity {
     durationMs: number = 3000,
     private priority: boolean = false
   ) {
-    super()
+    super("speech-balloon")
     if (durationMs) {
       setTimeout(() => {
         this.destroy()
@@ -28,14 +28,8 @@ export class SpeechBalloon extends Entity {
     }
   }
 
-  protected get elementClassList() {
-    let classes = ['speech-balloon']
-
-    if (this.priority) {
-      classes.push("priority")
-    }
-
-    return classes
+  protected get additionalElementClassList() {
+    return this.priority ? ["priority"] : []
   }
 
   protected get parentElement(): HTMLElement {

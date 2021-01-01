@@ -3,6 +3,8 @@ import { Div } from '../infra/dom'
 export class Entity {
   private _el: HTMLDivElement
 
+  constructor(private primaryElementClass: string) {}
+
   public spawn() {
     this.parentElement.appendChild(this.root)
     this.onInit()
@@ -31,7 +33,11 @@ export class Entity {
     return this._el
   }
 
-  protected get elementClassList(): string[] { return [] }
+  protected get elementClassList(): string[] {
+    return [this.primaryElementClass, ...this.additionalElementClassList]
+  }
+
+  protected get additionalElementClassList(): string[] { return [] }
   protected elementStyle(): Record<string, string> { return {} }
 
   protected onInit(): void { }

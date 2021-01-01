@@ -4,9 +4,7 @@ export class Board extends Entity {
   constructor(
     private width: number,
     private height: number,
-  ) { super() }
-
-  protected get elementClassList() { return ['board'] }
+  ) { super("board") }
 
   protected elementStyle() {
     return {

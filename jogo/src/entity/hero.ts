@@ -5,7 +5,7 @@ import { Entity } from './entity'
 export class Hero extends Entity {
   constructor(
     private position: Vector,
-  ) { super() }
+  ) { super("hero") }
 
   public rotateTo(degrees: number): Promise<void> {
     return TransformRotate(this.root, degrees, 230)

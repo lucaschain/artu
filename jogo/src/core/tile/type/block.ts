@@ -1,6 +1,6 @@
 import { Tile } from '../tile'
 import { Entity } from '../../../entity'
-import { Block as BlockEntity } from '../../../entity/tile'
+import { Tile as BlockEntity } from '../../../entity/tile'
 
 export class Block extends Tile {
   get walkable(): boolean {
@@ -8,6 +8,6 @@ export class Block extends Tile {
   }
 
   protected createEntity(): Entity {
-    return new BlockEntity(this.position)
+    return new BlockEntity(this.position, "block")
   }
 }

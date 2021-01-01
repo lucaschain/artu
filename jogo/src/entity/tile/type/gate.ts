@@ -1,4 +1,3 @@
-import { sleep } from '../../../utils'
 import { Vector } from '../../../math/vector'
 import { Tile } from '../tile'
 
@@ -6,7 +5,7 @@ export class Gate extends Tile {
   constructor(
     protected position: Vector,
     private orientation: string = "vertical"
-  ) { super(position) }
+  ) { super(position, "gate") }
 
   public open() {
     this.root.classList.add("open")
@@ -23,6 +22,4 @@ export class Gate extends Tile {
       transform: `rotate(${amount}deg)`
     }
   }
-
-  protected get type(): string { return "gate" }
 }

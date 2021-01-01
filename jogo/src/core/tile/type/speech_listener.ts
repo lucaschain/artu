@@ -4,7 +4,7 @@ import { Gate } from './gate'
 import { Board, BoardEvents } from '../../board'
 import { Entity } from '../../../entity'
 import { SpeechBalloon } from '../../../entity/speech_balloon'
-import { SpeechListener as SpeechListenerEntity } from '../../../entity/tile'
+import { Tile as SpeechListenerEntity } from '../../../entity/tile'
 
 export class SpeechListener extends Tile {
   constructor(
@@ -27,7 +27,7 @@ export class SpeechListener extends Tile {
   }
 
   protected createEntity(): Entity {
-    return new SpeechListenerEntity(this.position)
+    return new SpeechListenerEntity(this.position, "speech-listener")
   }
 
   public onHeroEvent(

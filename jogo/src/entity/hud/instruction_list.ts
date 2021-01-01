@@ -11,7 +11,7 @@ export class InstructionList extends Component<Instruction[]> {
 
   constructor(
     store: Store<Instruction[]>,
-    private runInstructionsCallback: RunInstructionsCallback = (list: string[]) => {},
+    private runInstructionsCallback: RunInstructionsCallback = (_list: string[]) => {},
     private clearInstructionsCallback: ClearInstructionsCallback = () => {},
   ) {
     super(store)
