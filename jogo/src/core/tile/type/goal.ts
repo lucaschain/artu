@@ -12,7 +12,7 @@ export class Goal extends Tile {
   public onHeroEvent(eventName: string, _eventData: Record<string, string>) {
     if (eventName === BoardEvents.StepIn) {
       const game = GameInstance()
-      game.nextLevel()
+      game.toNextLevel()
     }
   }
 }

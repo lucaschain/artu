@@ -1,30 +1,23 @@
 import { Store } from '../infra/store'
 
-import { InstructionPanel } from '../entity/hud/instruction_panel'
-import { InstructionList } from '../entity/hud/instruction_list'
-import { MemoryList } from '../entity/hud/memory_list'
-import { ScorePanel } from '../entity/hud/score_panel'
+import { SaveLevelState, LevelState } from '../infra/save'
 
 import { MemoryShard } from './memory'
 import { LevelConfiguration } from './level_configuration'
 import { Board } from './board'
 import { Hero } from './hero'
-import { Instruction, InstructionFactory, RunInstructions } from './instruction'
+import { Hud } from './hud'
+import { Instruction } from './instruction'
 
 export class Game {
   private hero: Hero
+  private hud: Hud
   private board: Board
   private instructionStore = new Store<Instruction[]>([])
   private memoryStore = new Store<MemoryShard[]>([])
   private scoreStore = new Store<number>(0)
-  private shouldStop = false
-  private isRunning = false
   private levelList: LevelConfiguration[] = []
-  private currentLevel: number = 0
-  private scorePanel: ScorePanel
-  private instructionPanel: InstructionPanel
-  private instructionList: InstructionList
-  private memoryList: MemoryList
+  private currentLevelIndex: number = 0
 
   public loadLevel(levelConfig: LevelConfiguration): void {
     this.board = new Board(
@@ -37,13 +30,12 @@ export class Game {
     this.createHud(levelConfig)
   }
 
-  public async nextLevel() {
-    const nextLevel = this.currentLevel + 1
-    const nextLevelExists = nextLevel < this.levelList.length
-    if (nextLevelExists) {
+  public async toNextLevel() {
+    this.saveLevel()
+    if (this.nextLevel) {
       await this.unloadLevel()
-      this.currentLevel = nextLevel
-      this.loadLevel(this.levelList[this.currentLevel])
+      this.currentLevelIndex++
+      this.loadLevel(this.nextLevel)
     }
   }
 
@@ -59,14 +51,11 @@ export class Game {
   private async unloadLevel() {
     this.clear()
     this.reset()
-    this.memoryList.destroy()
-    this.instructionList.destroy()
-    this.instructionPanel.destroy()
+    this.hud.destroy()
     this.board.destroy()
   }
 
   private async reset() {
-    this.shouldStop = true
     this.scoreStore.update(0)
     await this.hero.reset()
     this.board.reset()
@@ -76,49 +65,27 @@ export class Game {
     this.instructionStore.update([])
   }
 
-  private async restart() {
-    await this.reset()
-    this.shouldStop = false
+  private createHud(levelConfig: LevelConfiguration) {
+    this.hud = new Hud(
+      this.memoryStore,
+      this.scoreStore,
+      this.instructionStore,
+      this.reset.bind(this),
+      this.clear.bind(this),
+    )
+    this.hud.create(levelConfig, this.hero)
   }
 
-  private createHud(levelConfig: LevelConfiguration) {
-    const availableInstructions = InstructionFactory(this.hero, levelConfig.availableInstructions)
-    const availableInstructionStore = new Store<Instruction[]>(availableInstructions)
+  private get currentLevel(): LevelConfiguration {
+    return this.levelList[this.currentLevelIndex]
+  }
 
-    this.instructionPanel = new InstructionPanel(
-      availableInstructionStore,
-      this.instructionStore
-    )
-    this.instructionPanel.spawn()
+  private get nextLevel(): LevelConfiguration {
+    return this.levelList[this.currentLevelIndex + 1]
+  }
 
-    this.memoryList = new MemoryList(this.memoryStore)
-    this.memoryList.spawn()
-
-    this.scorePanel = new ScorePanel(this.scoreStore)
-    this.scorePanel.spawn()
-
-    this.instructionList = new InstructionList(this.instructionStore,
-      async (instructionList) => {
-        if (this.isRunning) {
-          return
-        }
-        this.isRunning = true
-
-        await this.restart()
-        await RunInstructions(
-          availableInstructions,
-          instructionList,
-          () => this.shouldStop
-        )
-
-        this.isRunning = false
-      },
-      () => {
-        this.reset()
-        this.clear()
-      }
-    )
-    this.instructionList.spawn()
+  private saveLevel() {
+    SaveLevelState(this.currentLevel.name, LevelState.Completed, this.scoreStore.current)
   }
 }
 
