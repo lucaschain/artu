@@ -17,8 +17,8 @@ export class InstructionPanel extends Component<Instruction[]> {
     })
   }
 
-  protected get elementClassList(): string[] {
-    return ['hud-panel', 'instruction-panel']
+  protected get additionalElementClassList(): string[] {
+    return ['instruction-panel']
   }
 
   protected bindEvents() {

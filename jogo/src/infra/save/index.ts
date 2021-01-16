@@ -20,8 +20,8 @@ export const SaveLevelState = (
 
   const serialized = JSON.stringify({
     name: levelName,
-    state: levelState,
-    score: maxScore(levelName, score)
+    state: maxLevelState(levelName, levelState),
+    score: maxScore(levelName, score),
   })
   localStorage.setItem(levelName, serialized)
 }
@@ -39,6 +39,16 @@ export const LoadLevelState = (levelName: string): LevelSave => {
 
   const unserialized = JSON.parse(levelSave) as LevelSave
   return unserialized
+}
+
+const maxLevelState = (levelName: string, state: LevelState): LevelState => {
+  const level = LoadLevelState(levelName)
+
+  if (!level) {
+    return state
+  }
+
+  return Math.max(state, level.state)
 }
 
 const maxScore = (levelName: string, score: number): number => {

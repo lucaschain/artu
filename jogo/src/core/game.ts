@@ -6,20 +6,23 @@ import { MemoryShard } from './memory'
 import { LevelConfiguration } from './level_configuration'
 import { Board } from './board'
 import { Hero } from './hero'
-import { Hud } from './hud'
+import { IngameHud } from './ingame_hud'
 import { Instruction } from './instruction'
+import { LevelSelection as LevelSelectionEntity } from '../entity/hud/level_selection'
 
 export class Game {
   private hero: Hero
-  private hud: Hud
+  private ingameHud: IngameHud
   private board: Board
   private instructionStore = new Store<Instruction[]>([])
   private memoryStore = new Store<MemoryShard[]>([])
   private scoreStore = new Store<number>(0)
+  private levelSelectionEntity: LevelSelectionEntity
   private levelList: LevelConfiguration[] = []
   private currentLevelIndex: number = 0
 
   public loadLevel(levelConfig: LevelConfiguration): void {
+
     this.board = new Board(
       levelConfig.width,
       levelConfig.height,
@@ -30,12 +33,26 @@ export class Game {
     this.createHud(levelConfig)
   }
 
+  public async toLevelSelection() {
+    this.unloadLevel()
+    this.levelSelectionEntity = new LevelSelectionEntity(
+      new Store<LevelConfiguration[]>(this.levelList),
+      level => {
+        if (!level) { return }
+        this.levelSelectionEntity.destroy()
+        this.loadLevel(level)
+      }
+    )
+
+    this.levelSelectionEntity.spawn()
+  }
+
   public async toNextLevel() {
     this.saveLevel()
     if (this.nextLevel) {
       await this.unloadLevel()
-      this.currentLevelIndex++
       this.loadLevel(this.nextLevel)
+      this.currentLevelIndex++
     }
   }
 
@@ -51,14 +68,14 @@ export class Game {
   private async unloadLevel() {
     this.clear()
     this.reset()
-    this.hud.destroy()
-    this.board.destroy()
+    this.ingameHud?.destroy()
+    this.board?.destroy()
   }
 
   private async reset() {
     this.scoreStore.update(0)
-    await this.hero.reset()
-    this.board.reset()
+    await this.hero?.reset()
+    this.board?.reset()
   }
 
   private clear(): void {
@@ -66,14 +83,14 @@ export class Game {
   }
 
   private createHud(levelConfig: LevelConfiguration) {
-    this.hud = new Hud(
+    this.ingameHud = new IngameHud(
       this.memoryStore,
       this.scoreStore,
       this.instructionStore,
       this.reset.bind(this),
       this.clear.bind(this),
     )
-    this.hud.create(levelConfig, this.hero)
+    this.ingameHud.create(levelConfig, this.hero)
   }
 
   private get currentLevel(): LevelConfiguration {

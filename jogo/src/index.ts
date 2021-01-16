@@ -7,4 +7,4 @@ const game = GameInstance()
 
 game.registerLevels(...LevelList)
 
-game.loadLevel(LevelList[0])
+game.toLevelSelection()

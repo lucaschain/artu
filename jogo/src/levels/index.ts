@@ -5,9 +5,9 @@ import { Level04 } from './level_04'
 import { Level05 } from './level_05'
 
 export const LevelList = [
-  Level05,
   Level01,
   Level02,
   Level03,
   Level04,
+  Level05,
 ]

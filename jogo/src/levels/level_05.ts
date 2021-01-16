@@ -2,7 +2,7 @@ import { LevelConfiguration } from '../core/level_configuration'
 import { Friend, Goal } from '../core/tile/type'
 
 export const Level05: LevelConfiguration = {
-  name: 'level_04',
+  name: 'level_05',
   availableInstructions: ['move', 'read', 'sum', 'subtract', 'say_memory'],
   width: 4,
   height: 1,

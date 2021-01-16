@@ -7,7 +7,9 @@ type RunInstructionsCallback = (instructionList: string[]) => void
 type ClearInstructionsCallback = () => void
 
 export class InstructionList extends Component<Instruction[]> {
-  protected get elementClassList(): string[] { return ['hud-panel', 'instruction-list'] }
+  protected get additionalElementClassList(): string[] {
+    return ['instruction-list']
+  }
 
   constructor(
     store: Store<Instruction[]>,

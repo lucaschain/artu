@@ -10,7 +10,7 @@ import { Hero } from './hero'
 import { LevelConfiguration } from './level_configuration'
 import { Instruction, InstructionFactory, RunInstructions } from './instruction'
 
-export class Hud {
+export class IngameHud {
   private instructionPanel: InstructionPanel
   private instructionList: InstructionList
   private memoryList: MemoryList
@@ -85,5 +85,4 @@ export class Hud {
     await this.reset()
     this.shouldStop = false
   }
-
 }
