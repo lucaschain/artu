@@ -88,6 +88,7 @@ export class Game {
       this.scoreStore,
       this.instructionStore,
       this.reset.bind(this),
+      this.eraseLastInstruction.bind(this),
       this.clear.bind(this),
     )
     this.ingameHud.create(levelConfig, this.hero)
@@ -103,6 +104,11 @@ export class Game {
 
   private saveLevel() {
     SaveLevelState(this.currentLevel.name, LevelState.Completed, this.scoreStore.current)
+  }
+
+  private eraseLastInstruction() {
+    const newInstructions = this.instructionStore.current.slice(0, -1)
+    this.instructionStore.update(newInstructions)
   }
 }
 

@@ -1,6 +1,8 @@
 <strong>Escolha a fase que quer jogar</strong>
 <ul>
   {{#each levels}}
-    <li data-name="{{this.name}}">{{this.name}}</li>
+    <li data-name="{{this.name}}">
+      <span>{{this.label}}</span>
+    </li>
   {{/each}}
 </ul>

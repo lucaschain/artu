@@ -4,6 +4,10 @@
   padding: 7px;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 .instruction-panel {
   bottom: 0;
   left: 0;
@@ -23,7 +27,6 @@
   margin: 5px;
   padding: 5px;
   background-color: white;
-  cursor: pointer;
 }
 
 .instruction-list {
@@ -41,7 +44,6 @@
 }
 
 .instruction-list .controls .control-button {
-  cursor: pointer;
   display: inline-block;
 }
 
@@ -53,3 +55,13 @@
   max-width: 120px;
   text-align: center;
 }
+
+.memory-list {
+  top: 0;
+  bottom: 0;
+  right: left;
+  margin: auto 0;
+  min-width: 200px;
+  max-height: 50%;
+}
+

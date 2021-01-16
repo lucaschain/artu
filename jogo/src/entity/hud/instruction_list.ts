@@ -5,6 +5,7 @@ import * as template from './template/instruction_list.hbs'
 
 type RunInstructionsCallback = (instructionList: string[]) => void
 type ClearInstructionsCallback = () => void
+type EraseLastInstructionCallback = () => void
 
 export class InstructionList extends Component<Instruction[]> {
   protected get additionalElementClassList(): string[] {
@@ -14,6 +15,7 @@ export class InstructionList extends Component<Instruction[]> {
   constructor(
     store: Store<Instruction[]>,
     private runInstructionsCallback: RunInstructionsCallback = (_list: string[]) => {},
+    private eraseLastInstructionCallback: EraseLastInstructionCallback = () => {},
     private clearInstructionsCallback: ClearInstructionsCallback = () => {},
   ) {
     super(store)
@@ -26,14 +28,19 @@ export class InstructionList extends Component<Instruction[]> {
   }
 
   bindEvents() {
+    const eraseLastButton = this.root.querySelector('#erase-last-instruction')
+    eraseLastButton?.addEventListener('click', () => {
+      this.eraseLastInstructionCallback()
+    })
+
     const runButton = this.root.querySelector("#run-instructions")
-    runButton && runButton.addEventListener('click', () => {
+    runButton?.addEventListener('click', () => {
       const list = this.store.current.map(instruction => instruction.name)
       this.runInstructionsCallback(list)
     })
 
     const clearButton = this.root.querySelector("#clear-instructions")
-    clearButton && clearButton.addEventListener('click', () => {
+    clearButton?.addEventListener('click', () => {
       this.clearInstructionsCallback()
     })
   }

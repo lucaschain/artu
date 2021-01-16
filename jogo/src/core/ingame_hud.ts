@@ -4,6 +4,7 @@ import { MemoryList } from '../entity/hud/memory_list'
 import { InstructionPanel } from '../entity/hud/instruction_panel'
 import { InstructionList } from '../entity/hud/instruction_list'
 import { ScorePanel } from '../entity/hud/score_panel'
+import { BackButton } from '../entity/hud/back_button'
 
 import { MemoryShard } from './memory'
 import { Hero } from './hero'
@@ -15,6 +16,7 @@ export class IngameHud {
   private instructionList: InstructionList
   private memoryList: MemoryList
   private scorePanel: ScorePanel
+  private backButton: BackButton
   private shouldStop = false
   private isRunning = false
 
@@ -23,6 +25,7 @@ export class IngameHud {
     private scoreStore: Store<number>,
     private instructionStore: Store<Instruction[]>,
     private resetCallback: () => Promise<void>,
+    private eraseLastInstructionCallback: () => () => void,
     private clearCallback: () => () => void
   ) {
   }
@@ -46,27 +49,10 @@ export class IngameHud {
     this.scorePanel = new ScorePanel(this.scoreStore)
     this.scorePanel.spawn()
 
-    this.instructionList = new InstructionList(this.instructionStore,
-      async (instructionList) => {
-        if (this.isRunning) {
-          return
-        }
-        this.isRunning = true
+    this.backButton = new BackButton(new Store<void>(undefined))
+    this.backButton.spawn()
 
-        await this.restart()
-        await RunInstructions(
-          availableInstructions,
-          instructionList,
-          () => this.shouldStop
-        )
-
-        this.isRunning = false
-      },
-      () => {
-        this.reset()
-        this.clearCallback()
-      }
-    )
+    this.instructionList = this.createInstructionList(availableInstructions)
     this.instructionList.spawn()
   }
 
@@ -74,6 +60,8 @@ export class IngameHud {
     this.memoryList.destroy()
     this.instructionList.destroy()
     this.instructionPanel.destroy()
+    this.scorePanel.destroy()
+    this.backButton.destroy()
   }
 
   private reset(): Promise<void> {
@@ -84,5 +72,40 @@ export class IngameHud {
   private async restart() {
     await this.reset()
     this.shouldStop = false
+  }
+
+  private createInstructionList(availableInstructions: Instruction[]): InstructionList {
+    const runInstructionsCallback = async (instructionList: string[]) => {
+      if (this.isRunning) {
+        return
+      }
+      this.isRunning = true
+
+      await this.restart()
+      await RunInstructions(
+        availableInstructions,
+        instructionList,
+        () => this.shouldStop
+      )
+
+      this.isRunning = false
+    }
+
+    const eraseLastInstructionCallback = () => {
+      this.reset()
+      this.eraseLastInstructionCallback()
+    }
+
+    const clearInstructionsCallback = () => {
+      this.reset()
+      this.clearCallback()
+    }
+
+    return new InstructionList(
+      this.instructionStore,
+      runInstructionsCallback,
+      eraseLastInstructionCallback,
+      clearInstructionsCallback
+    )
   }
 }

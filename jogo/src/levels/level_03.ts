@@ -3,6 +3,7 @@ import { SpeechListener, Gate, Goal } from '../core/tile/type'
 
 export const Level03: LevelConfiguration = {
   name: 'level_03',
+  label: 'Nível 3',
   availableInstructions: ['move', 'say_yes'],
   width: 4,
   height: 1,

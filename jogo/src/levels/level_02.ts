@@ -3,6 +3,7 @@ import { Block, Goal } from '../core/tile/type'
 
 export const Level02: LevelConfiguration = {
   name: 'level_02',
+  label: 'Nível 2',
   availableInstructions: ['move', 'turn_right'],
   width: 3,
   height: 3,
