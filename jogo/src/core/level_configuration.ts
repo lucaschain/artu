@@ -1,3 +1,5 @@
+import { Vector } from '../math/vector'
+import { Direction } from '../math/rotation'
 import { Tile } from './tile'
 
 export type LevelConfiguration = {
@@ -7,4 +9,6 @@ export type LevelConfiguration = {
   width: number,
   height: number,
   availableInstructions: string[],
+  startPosition?: Vector,
+  startDirection?: Direction,
 }

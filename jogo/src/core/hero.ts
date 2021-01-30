@@ -1,6 +1,6 @@
 import { sleep } from '../utils'
 import { Vector, VectorSum } from '../math/vector'
-import { ToRadians } from '../math/rotation'
+import { Direction, ToRadians } from '../math/rotation'
 import { Board } from './board'
 import { Hero as HeroEntity } from '../entity/hero'
 import { BoardEvents } from './board'
@@ -10,19 +10,23 @@ import { Store } from '../infra/store'
 
 export class Hero {
   private entity: HeroEntity
-  private direction: number = 0
   private memory: Memory
+  private direction: number
+  private position: Vector
 
   constructor(
     private board: Board,
-    private position: Vector,
+    private initialPosition: Vector,
+    private initialDirection: Direction = Direction.EAST,
     memoryStore: Store<MemoryShard[]>,
   ) {
+    this.position = this.initialPosition
     this.entity = new HeroEntity(
       this.realPosition
     )
     this.memory = new Memory(memoryStore)
     this.entity.spawn()
+    this.rotateTo(this.initialDirection)
   }
 
   public async sayYes() {
@@ -44,8 +48,8 @@ export class Hero {
   public async reset() {
     this.memory.reset()
     await Promise.all([
-      this.rotateTo(0),
-      this.moveTo({x: 0, y: 0})
+      this.rotateTo(this.initialDirection),
+      this.moveTo(this.initialPosition)
     ])
   }
 

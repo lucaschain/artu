@@ -29,7 +29,8 @@ export class Game {
       levelConfig.tiles
     )
 
-    this.hero = new Hero(this.board, {x: 0,y: 0}, this.memoryStore)
+    const startPosition = levelConfig.startPosition || {x: 0,y: 0}
+    this.hero = new Hero(this.board, startPosition, levelConfig.startDirection, this.memoryStore)
     this.createHud(levelConfig)
   }
 
