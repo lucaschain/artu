@@ -1,5 +1,7 @@
 <ul>
   {{#each instructions}}
-    <li class="clickable" data-name="{{this.name}}">{{this.label}}</li>
+    <li class="clickable hud-suggestion hud-suggestion--{{@index}}" data-name="{{this.name}}">
+      {{this.label}}
+    </li>
   {{/each}}
 </ul>

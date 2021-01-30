@@ -8,3 +8,7 @@ html, body {
   margin: 0;
   font-family: 'Verdana'
 }
+
+li {
+  list-style: none;
+}

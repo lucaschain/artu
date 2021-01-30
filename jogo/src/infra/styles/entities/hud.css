@@ -23,7 +23,7 @@
 }
 
 .instruction-panel li {
-  display: inline-block;
+  display: flex;
   margin: 5px;
   padding: 5px;
   background-color: white;
@@ -35,6 +35,11 @@
   right: 0;
   margin: auto 0;
   max-height: 50%;
+}
+
+.instruction-list ul {
+  height: 90%;
+  overflow-y: auto;
 }
 
 .instruction-list .controls {
@@ -65,3 +70,74 @@
   max-height: 50%;
 }
 
+.hud-suggestion {
+  position: relative;
+  text-align: center;
+}
+
+.hud-suggestion:after {
+  content: '';
+  display: block;
+  background-color: #fff;
+  margin-left: 6px;
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  font-size: 12px;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  background-color: #4976f2;
+  color: #fff;
+  border-radius: 1px solid #2926d2;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,1);
+  z-index: 1;
+  opacity: 0.5;
+  transition: opacity .2s ease-out;
+  will-change: opacity;
+}
+
+.hud-suggestion:hover:after {
+  opacity: 1;
+}
+
+.hud-suggestion--0:after {
+  content: 'Q';
+}
+
+.hud-suggestion--1:after {
+  content: 'W';
+}
+
+.hud-suggestion--2:after {
+  content: 'E';
+}
+
+.hud-suggestion--3:after {
+  content: 'R';
+}
+
+.hud-suggestion--4:after {
+  content: 'T';
+}
+
+.hud-suggestion--5:after {
+  content: 'Y';
+}
+
+.hud-suggestion--6:after {
+  content: 'U';
+}
+
+.hud-suggestion--7:after {
+  content: 'I';
+}
+
+.hud-suggestion--8:after {
+  content: 'O';
+}
+
+.hud-suggestion--9:after {
+  content: 'P';
+}

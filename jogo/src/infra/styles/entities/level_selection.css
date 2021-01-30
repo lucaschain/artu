@@ -14,14 +14,16 @@
   align-items: center;
   justify-content: center;
   flex-flow: wrap;
-  height: 90%;
+  height: 93%;
+  overflow: auto;
 }
 
 .level-selection li {
   cursor: pointer;
   width: 100px;
-  list-style: none;
   height: 100px;
+  padding: 10px;
+  font-size: 1rem;
   background: white;
   margin: 5px;
   text-align: center;
