@@ -27,6 +27,13 @@ export class InstructionList extends Component<Instruction[]> {
     })
   }
 
+  afterRender() {
+    const ul = this.root.querySelector('ul')
+    ul.scrollTo({
+      top: ul.scrollHeight
+    })
+  }
+
   bindEvents() {
     const eraseLastButton = this.root.querySelector('#erase-last-instruction')
     eraseLastButton?.addEventListener('click', () => {
@@ -42,6 +49,19 @@ export class InstructionList extends Component<Instruction[]> {
     const clearButton = this.root.querySelector("#clear-instructions")
     clearButton?.addEventListener('click', () => {
       this.clearInstructionsCallback()
+    })
+
+    document.addEventListener('keydown', (event) => {
+      event.preventDefault()
+      switch (event.code) {
+        case 'Backspace':
+          this.eraseLastInstructionCallback()
+          break
+        case 'Space':
+          const list = this.store.current.map(instruction => instruction.name)
+          this.runInstructionsCallback(list)
+          break
+      }
     })
   }
 }

@@ -33,6 +33,24 @@ export class InstructionPanel extends Component<Instruction[]> {
         }
       })
     })
+
+    document.addEventListener('keydown', ({ key }) => {
+      const availableKeys = "qwertyuiop".split('')
+      if (availableKeys.includes(key)) {
+        const commandIndex = availableKeys.indexOf(key)
+        const listItem = listItems[commandIndex]
+
+        if (!listItem) {
+          return
+        }
+
+        const instructionName = listItem.getAttribute('data-name')
+
+        if (instructionName) {
+          this.addInstructionByName(instructionName)
+        }
+      }
+    })
   }
 
   private addInstructionByName(instructionName: string) {

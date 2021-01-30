@@ -10,17 +10,19 @@ export abstract class Component<T> extends Entity {
     })
 
     this.update(store.current, store.current)
+    this.bindEvents()
   }
 
   protected abstract render(newState: T): string
 
   protected shouldUpdate(_newState: T, _oldState: T) { return true }
   protected bindEvents(): void { }
+  protected afterRender(): void { }
 
   private update(newState: T, oldState: T) {
     if (this.shouldUpdate(newState, oldState)) {
       this.root.innerHTML = this.render(newState)
-      this.bindEvents()
+      this.afterRender()
     }
   }
 }
