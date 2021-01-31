@@ -23,6 +23,11 @@ export class Game {
 
   public loadLevel(levelConfig: LevelConfiguration): void {
 
+    const currentLevelIndex = this.levelIndexByName(levelConfig.name)
+    if (currentLevelIndex != null) {
+      this.currentLevelIndex = currentLevelIndex
+    }
+
     this.board = new Board(
       levelConfig.width,
       levelConfig.height,
@@ -53,7 +58,6 @@ export class Game {
     if (this.nextLevel) {
       await this.unloadLevel()
       this.loadLevel(this.nextLevel)
-      this.currentLevelIndex++
     }
   }
 
@@ -110,6 +114,14 @@ export class Game {
   private eraseLastInstruction() {
     const newInstructions = this.instructionStore.current.slice(0, -1)
     this.instructionStore.update(newInstructions)
+  }
+
+  private levelIndexByName(levelName: string): number | null {
+    return this.levelList
+      .map((levelConfig, index) => ({ levelConfig, index }))
+      .filter(({ levelConfig }) => {
+        return levelName === levelConfig.name
+      })[0]?.index
   }
 }
 
