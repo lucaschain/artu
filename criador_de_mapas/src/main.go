@@ -12,7 +12,12 @@ import (
 type forEachImagePixelCallback = func(x, y int, color color.Color)
 
 func main() {
-  existingImageFile, err := os.Open("test.png")
+  if len(os.Args) == 1 {
+    fmt.Println("Passe o nome da imagem como argumento:\n./criador_de_mapas arquivo.png")
+    os.Exit(1)
+  }
+  imageName := os.Args[1]
+  existingImageFile, err := os.Open(fmt.Sprintf("img/%s", imageName))
 	if err != nil {
     panic(err)
 	}
