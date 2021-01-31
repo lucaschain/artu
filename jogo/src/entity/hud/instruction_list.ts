@@ -1,5 +1,5 @@
 import { Instruction } from './../../core/instruction'
-import { Component } from './component'
+import { Binding, Component } from './component'
 import { Store } from '.././../infra/store'
 import * as template from './template/instruction_list.hbs'
 
@@ -34,34 +34,48 @@ export class InstructionList extends Component<Instruction[]> {
     })
   }
 
-  bindEvents() {
-    const eraseLastButton = this.root.querySelector('#erase-last-instruction')
-    eraseLastButton?.addEventListener('click', () => {
-      this.eraseLastInstructionCallback()
-    })
-
-    const runButton = this.root.querySelector("#run-instructions")
-    runButton?.addEventListener('click', () => {
-      const list = this.store.current.map(instruction => instruction.name)
-      this.runInstructionsCallback(list)
-    })
-
-    const clearButton = this.root.querySelector("#clear-instructions")
-    clearButton?.addEventListener('click', () => {
-      this.clearInstructionsCallback()
-    })
-
-    document.addEventListener('keydown', (event) => {
-      event.preventDefault()
-      switch (event.code) {
-        case 'Backspace':
-          this.eraseLastInstructionCallback()
-          break
-        case 'Space':
-          const list = this.store.current.map(instruction => instruction.name)
-          this.runInstructionsCallback(list)
-          break
+  protected get bindings(): Binding[] {
+    return [
+      {
+        elements: this.root.querySelectorAll('#erase-last-instruction'),
+        action: this.eraseLastInstructionCallback,
+        event: 'click'
+      },
+      {
+        elements: this.root.querySelectorAll('#run-instructions'),
+        action: this.runInstructions.bind(this),
+        event: 'click'
+      },
+      {
+        elements: this.root.querySelectorAll('#clear-instructions'),
+        action: this.clearInstructionsCallback,
+        event: 'click'
+      },
+      {
+        elements: document.querySelectorAll('body'),
+        action: this.onKeyDown.bind(this),
+        event: 'keydown',
       }
-    })
+    ]
+  }
+
+  private runInstructions(_event: Event) {
+    const list = this.store.current.map(instruction => instruction.name)
+    this.runInstructionsCallback(list)
+  }
+
+  onKeyDown(event: KeyboardEvent) {
+    if (this.isDestroyed) {
+      return
+    }
+    event.preventDefault()
+    switch (event.code) {
+      case 'Backspace':
+        this.eraseLastInstructionCallback()
+        break
+      case 'Space':
+        this.runInstructions(event)
+        break
+    }
   }
 }

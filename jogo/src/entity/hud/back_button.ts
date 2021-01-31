@@ -1,4 +1,4 @@
-import { Component } from './component'
+import { Binding, Component } from './component'
 import * as template from './template/back_button.hbs'
 import { GameInstance }  from '../../core/game'
 
@@ -11,12 +11,18 @@ export class BackButton extends Component<void> {
     return template({})
   }
 
-  bindEvents() {
-    const button = this.root.querySelector("#back-button")
-    button && button.addEventListener('click', () => {
-      const game = GameInstance()
-      game.toLevelSelection()
-    })
+  protected get bindings(): Binding[] {
+    return [
+      {
+        elements: this.root.querySelectorAll("#back-button"),
+        action: this.onClickBackButton,
+        event: 'click',
+      }
+    ]
+  }
 
+  private onClickBackButton(_event: Event) {
+    const game = GameInstance()
+    game.toLevelSelection()
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from './component'
+import { Binding, Component } from './component'
 import { LevelConfiguration } from '../../core/level_configuration'
 import { Store } from '.././../infra/store'
 import * as template from './template/level_selection.hbs'
@@ -16,19 +16,22 @@ export class LevelSelection extends Component<LevelConfiguration[]> {
     })
   }
 
-  bindEvents() {
-    const levelButtons = this.root.querySelectorAll("li[data-name]")
+  protected get bindings(): Binding[] {
+    return [{
+      event: 'click',
+      elements: this.root.querySelectorAll("li[data-name]"),
+      action: this.onClickLevel.bind(this)
+    }]
+  }
 
-    levelButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        const levelName = button.getAttribute('data-name')
+  onClickLevel(event: Event) {
+    const button = event.currentTarget as HTMLElement
+    const levelName = button.getAttribute('data-name')
 
-        if (levelName) {
-          const config = this.configForLevelName(levelName)
-          this.levelSelectionCallback(config)
-        }
-      })
-    })
+    if (levelName) {
+      const config = this.configForLevelName(levelName)
+      this.levelSelectionCallback(config)
+    }
   }
 
   protected get additionalElementClassList(): string[] {
