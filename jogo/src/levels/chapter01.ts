@@ -4,7 +4,7 @@ import { LevelConfiguration } from '../core/level_configuration'
 
 export const Chapter01: LevelConfiguration[] = [
   {
-    name: 'chapter_00_level_001',
+    name: 'chapter_01_level_001',
     label: 'Olá, mundo!',
     availableInstructions: ['move'],
     width: 3,
@@ -14,7 +14,7 @@ export const Chapter01: LevelConfiguration[] = [
     ]
   },
   {
-    name: 'chapter_00_level_002',
+    name: 'chapter_01_level_002',
     label: 'Primeiros Passos',
     availableInstructions: ['move'],
     width: 5,
@@ -24,7 +24,7 @@ export const Chapter01: LevelConfiguration[] = [
     ]
   },
   {
-    name: 'chapter_00_level_003',
+    name: 'chapter_01_level_003',
     label: 'O que tem pra esquerda?',
     availableInstructions: ['move', 'turn_left'],
     width: 3,
@@ -37,7 +37,7 @@ export const Chapter01: LevelConfiguration[] = [
     ]
   },
   {
-    name: 'chapter_00_level_004',
+    name: 'chapter_01_level_004',
     label: 'S de sapato',
     availableInstructions: ['move', 'turn_left', 'turn_right'],
     width: 3,
@@ -53,7 +53,7 @@ export const Chapter01: LevelConfiguration[] = [
     ]
   },
   {
-    name: 'chapter_00_level_005',
+    name: 'chapter_01_level_005',
     label: 'Espiral',
     availableInstructions: ['move', 'turn_right'],
     width: 7,
@@ -81,7 +81,7 @@ export const Chapter01: LevelConfiguration[] = [
     ]
   },
   {
-    name: 'chapter_00_level_006',
+    name: 'chapter_01_level_006',
     label: 'Labirinto',
     startPosition: {x: 8, y: 8 },
     startDirection: Direction.NORTH,

@@ -5,11 +5,12 @@ import (
 	"image"
 	"image/color"
 	"image/png"
-	"math"
 	"os"
 )
 
 type forEachImagePixelCallback = func(x, y int, color color.Color)
+
+type ColorMap = map[color.Color]string
 
 func main() {
   if len(os.Args) == 1 {
@@ -18,9 +19,9 @@ func main() {
   }
   imageName := os.Args[1]
   existingImageFile, err := os.Open(fmt.Sprintf("img/%s", imageName))
-	if err != nil {
+  if err != nil {
     panic(err)
-	}
+  }
   defer existingImageFile.Close()
 
   existingImageFile.Seek(0, 0)
@@ -31,16 +32,22 @@ func main() {
   }
 
   forEachImagePixel(decodedImage, func (x, y int, color color.Color) {
-    if isBlack(color) {
-      fmt.Printf("new Block({x: %d, y: %d}),\n", x, y)
+    tileName := tileStringForColor(color)
+    if tileName != "" {
+      fmt.Printf("new %s({x: %d, y: %d}),\n", tileName, x, y)
     }
   })
 }
 
-func isBlack(color color.Color) bool {
-  red, green, blue, alpha := color.RGBA()
+func tileStringForColor(targetColor color.Color) string {
+  colorMap := ColorMap{
+    color.NRGBA{0x00, 0x00, 0x00, 0xff}: "Block",
+    color.NRGBA{0x67, 0x3a, 0xb7, 0xff}: "Gate",
+    color.NRGBA{0x4c, 0xaf, 0x50, 0xff}: "Goal",
+    color.NRGBA{0x21, 0x96, 0xf3, 0xff}: "SpeechListener",
+  }
 
-  return red == 0 && green == 0 && blue == 0 && alpha == math.MaxUint16
+  return colorMap[targetColor]
 }
 
 func forEachImagePixel(image image.Image, callback forEachImagePixelCallback) {

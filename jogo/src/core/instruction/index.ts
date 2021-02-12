@@ -34,7 +34,7 @@ export const InstructionFactory = (hero: Hero, availableInstructions?: string[])
     {
       name: 'say_no',
       label: 'Dizer não',
-      action: () => hero.sayYes()
+      action: () => hero.sayNo()
     },
     {
       name: 'read',

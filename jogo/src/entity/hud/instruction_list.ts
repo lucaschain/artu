@@ -39,7 +39,7 @@ export class InstructionList extends Component<Instruction[]> {
       {
         elements: this.root.querySelectorAll('#erase-last-instruction'),
         action: this.eraseLastInstructionCallback,
-        event: 'click'
+        event: 'mousedown'
       },
       {
         elements: this.root.querySelectorAll('#run-instructions'),
