@@ -18,7 +18,6 @@ export abstract class Component<T> extends Entity {
     })
 
     this.update(store.current, store.current)
-    this.bindEvents()
   }
 
   protected abstract render(newState: T): string
@@ -31,6 +30,8 @@ export abstract class Component<T> extends Entity {
     if (this.shouldUpdate(newState, oldState)) {
       this.root.innerHTML = this.render(newState)
       this.afterRender()
+      this.unbindEvents()
+      this.bindEvents()
     }
   }
 
@@ -42,12 +43,16 @@ export abstract class Component<T> extends Entity {
     })
   }
 
-  protected onDestroy() {
-    this.isDestroyed = true
+  private unbindEvents(): void {
     this.bindings.forEach((binding) => {
       binding.elements.forEach((target) => {
         target.removeEventListener(binding.event, binding.action)
       })
     })
+  }
+
+  protected onDestroy() {
+    this.isDestroyed = true
+    this.unbindEvents()
   }
 }
