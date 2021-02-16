@@ -1,8 +1,17 @@
 import { Tile } from '../tile'
+import { Vector } from '../../../math/vector'
 import { Gate as GateEntity } from '../../../entity/tile'
 
 export class Gate extends Tile {
   private isOpen = false
+
+  constructor(
+    position: Vector,
+    id = '',
+    private orientation = 'vertical'
+  ) {
+    super(position, id)
+  }
 
   public async open() {
     this.isOpen = true
@@ -23,7 +32,7 @@ export class Gate extends Tile {
   }
 
   protected createEntity(): GateEntity {
-    return new GateEntity(this.position)
+    return new GateEntity(this.position, this.orientation)
   }
 
   private get gateEntity(): GateEntity {
