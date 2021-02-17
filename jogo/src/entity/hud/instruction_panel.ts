@@ -21,12 +21,16 @@ export class InstructionPanel extends Component<Instruction[]> {
     return ['instruction-panel']
   }
 
-  protected get bindings(): Binding[] {
+  protected get localBindings(): Binding[] {
     return [{
       event: 'click',
       elements: this.root.querySelectorAll('li'),
       action: this.onClickListItem.bind(this)
-    }, {
+    }]
+  }
+
+  protected get globalBindings(): Binding[] {
+    return [{
       event: 'keydown',
       elements: document.querySelectorAll('body'),
       action: this.onKeyPress.bind(this)

@@ -19,9 +19,9 @@ export class Entity {
   }
 
   public destroy() {
-    if (this._el) {
+    if (this.root) {
       this.onDestroy()
-      this._el.remove()
+      this.root.remove()
     }
   }
 

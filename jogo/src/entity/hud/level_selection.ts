@@ -16,7 +16,7 @@ export class LevelSelection extends Component<LevelConfiguration[]> {
     })
   }
 
-  protected get bindings(): Binding[] {
+  protected get localBindings(): Binding[] {
     return [{
       event: 'click',
       elements: this.root.querySelectorAll("li[data-name]"),

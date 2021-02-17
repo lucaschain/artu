@@ -34,7 +34,17 @@ export class InstructionList extends Component<Instruction[]> {
     })
   }
 
-  protected get bindings(): Binding[] {
+  protected get globalBindings(): Binding[] {
+    return [
+      {
+        elements: document.querySelectorAll('body'),
+        action: this.onKeyDown.bind(this),
+        event: 'keydown',
+      }
+    ]
+  }
+
+  protected get localBindings(): Binding[] {
     return [
       {
         elements: this.root.querySelectorAll('#erase-last-instruction'),
@@ -51,11 +61,6 @@ export class InstructionList extends Component<Instruction[]> {
         action: this.clearInstructionsCallback,
         event: 'click'
       },
-      {
-        elements: document.querySelectorAll('body'),
-        action: this.onKeyDown.bind(this),
-        event: 'keydown',
-      }
     ]
   }
 

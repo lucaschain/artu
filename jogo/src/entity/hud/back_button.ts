@@ -11,7 +11,7 @@ export class BackButton extends Component<void> {
     return template({})
   }
 
-  protected get bindings(): Binding[] {
+  protected get localBindings(): Binding[] {
     return [
       {
         elements: this.root.querySelectorAll("#back-button"),

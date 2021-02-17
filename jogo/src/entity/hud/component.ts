@@ -18,41 +18,41 @@ export abstract class Component<T> extends Entity {
     })
 
     this.update(store.current, store.current)
+    this.bindGlobalEvents()
   }
 
   protected abstract render(newState: T): string
 
   protected shouldUpdate(_newState: T, _oldState: T) { return true }
-  protected get bindings(): Binding[] { return [] }
+  protected get localBindings(): Binding[] { return [] }
+  protected get globalBindings(): Binding[] { return [] }
   protected afterRender(): void { }
 
   private update(newState: T, oldState: T) {
     if (this.shouldUpdate(newState, oldState)) {
       this.root.innerHTML = this.render(newState)
       this.afterRender()
-      this.unbindEvents()
-      this.bindEvents()
+      this.bindLocalEvents()
     }
   }
 
-  private bindEvents(): void {
-    this.bindings.forEach((binding) => {
+  private bindGlobalEvents(): void {
+    this.bindEvents(this.globalBindings)
+  }
+
+  private bindLocalEvents(): void {
+    this.bindEvents(this.localBindings)
+  }
+
+  private bindEvents(bindings: Binding[]): void {
+    bindings.forEach((binding) => {
       binding.elements.forEach((target) => {
         target.addEventListener(binding.event, binding.action)
       })
     })
   }
 
-  private unbindEvents(): void {
-    this.bindings.forEach((binding) => {
-      binding.elements.forEach((target) => {
-        target.removeEventListener(binding.event, binding.action)
-      })
-    })
-  }
-
   protected onDestroy() {
     this.isDestroyed = true
-    this.unbindEvents()
   }
 }
