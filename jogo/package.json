@@ -16,7 +16,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "dev": "webpack serve",
+    "start": "webpack serve",
     "watch": "webpack --watch",
     "build": "webpack"
   },
