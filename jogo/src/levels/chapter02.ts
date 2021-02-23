@@ -39,7 +39,7 @@ export const Chapter02: LevelConfiguration[] = [
   },
   {
     name: 'chapter_02_level_003',
-    label: 'pensar num nome',
+    label: 'Dependências',
     availableInstructions: [
       'move', 'say_yes', 'say_no', 'turn_right', 'turn_left'
     ],
