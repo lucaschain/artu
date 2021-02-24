@@ -6,9 +6,7 @@ export class ScorePanel extends Component<number> {
     return ['score-panel']
   }
 
-  render(state: number): string {
-    return template({
-      score: state
-    })
+  render(score: number): string {
+    return template({ score })
   }
 }

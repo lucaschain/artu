@@ -1,6 +1,6 @@
-export enum LevelState {
-  Unknown, Unlocked, Completed
-}
+import { LevelList } from '../../levels'
+
+export enum LevelState { Unknown, Unlocked, Completed }
 
 type LevelSave = {
   name: string,
@@ -26,23 +26,30 @@ export const SaveLevelState = (
   localStorage.setItem(levelName, serialized)
 }
 
-export const LoadLevelState = (levelName: string): LevelSave => {
+export const LoadLevelSave = (levelName: string): LevelSave | null => {
   if (!window.localStorage) {
     console.warn('localStorage não disponível')
     return null
   }
 
   const levelSave = localStorage.getItem(levelName)
+  const isFirstLevel = levelName === LevelList[0]?.name
   if (!levelSave) {
+    if (isFirstLevel) {
+      return {
+        name: levelName,
+        state: LevelState.Unlocked,
+        bestScore: 0,
+      }
+    }
     return null
   }
 
-  const unserialized = JSON.parse(levelSave) as LevelSave
-  return unserialized
+  return JSON.parse(levelSave) as LevelSave
 }
 
 const maxLevelState = (levelName: string, state: LevelState): LevelState => {
-  const level = LoadLevelState(levelName)
+  const level = LoadLevelSave(levelName)
 
   if (!level) {
     return state
@@ -52,7 +59,7 @@ const maxLevelState = (levelName: string, state: LevelState): LevelState => {
 }
 
 const maxScore = (levelName: string, score: number): number => {
-  const level = LoadLevelState(levelName)
+  const level = LoadLevelSave(levelName)
 
   if (!level) {
     return score

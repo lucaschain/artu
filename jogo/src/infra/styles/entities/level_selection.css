@@ -30,6 +30,15 @@
   line-height: 100px;
 }
 
+.level-selection li.level-state-0 {
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+.level-selection li.level-state-2 {
+  background-color: #8bf9b5;
+}
+
 .level-selection span {
   display: inline-block;
   vertical-align: middle;

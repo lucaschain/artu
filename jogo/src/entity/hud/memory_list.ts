@@ -7,9 +7,7 @@ export class MemoryList extends Component<MemoryShard[]> {
     return ['memory-list']
   }
 
-  render(state: MemoryShard[]): string {
-    return template({
-      memories: state
-    })
+  render(memories: MemoryShard[]): string {
+    return template({ memories })
   }
 }

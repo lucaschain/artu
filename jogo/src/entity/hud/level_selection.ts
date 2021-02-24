@@ -1,7 +1,13 @@
 import { Binding, Component } from './component'
 import { LevelConfiguration } from '../../core/level_configuration'
 import { Store } from '.././../infra/store'
+import { LevelState, LoadLevelSave } from '../../infra/save'
 import * as template from './template/level_selection.hbs'
+
+type LevelItem = {
+  configuration: LevelConfiguration,
+  state: LevelState,
+}
 
 export class LevelSelection extends Component<LevelConfiguration[]> {
   constructor(
@@ -11,9 +17,17 @@ export class LevelSelection extends Component<LevelConfiguration[]> {
     super(store)
   }
   render(state: LevelConfiguration[]): string {
-    return template({
-      levels: state
+
+    const levels: LevelItem[] = state.map((configuration) => {
+      const levelState = LoadLevelSave(configuration.name)?.state
+
+      return {
+        configuration,
+        state: levelState || 0,
+      }
     })
+
+    return template({ levels })
   }
 
   protected get localBindings(): Binding[] {
