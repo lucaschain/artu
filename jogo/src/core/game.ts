@@ -109,6 +109,7 @@ export class Game {
 
   private saveLevel() {
     SaveLevelState(this.currentLevel.name, LevelState.Completed, this.scoreStore.current)
+    SaveLevelState(this.nextLevel.name, LevelState.Unlocked, 0)
   }
 
   private eraseLastInstruction() {
