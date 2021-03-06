@@ -22,16 +22,21 @@ export class InstructionList extends Component<Instruction[]> {
   }
 
   render(state: Instruction[]): string {
-    return template({
+    const output = template({
       instructions: state
     })
+
+    return output
   }
 
   afterRender() {
     const ul = this.root.querySelector('ul')
-    ul.scrollTo({
-      top: ul.scrollHeight
-    })
+
+    if (ul && ul.scrollTo) {
+      ul.scrollTo({
+        top: ul.scrollHeight
+      })
+    }
   }
 
   protected get globalBindings(): Binding[] {

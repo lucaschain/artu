@@ -1,6 +1,7 @@
 import { Store } from '../infra/store'
 
 import { MemoryList } from '../entity/hud/memory_list'
+import { LevelTitle } from '../entity/hud/level_title'
 import { InstructionPanel } from '../entity/hud/instruction_panel'
 import { InstructionList } from '../entity/hud/instruction_list'
 import { ScorePanel } from '../entity/hud/score_panel'
@@ -14,6 +15,7 @@ import { Instruction, InstructionFactory, InstructionRunner } from './instructio
 export class IngameHud {
   private instructionPanel: InstructionPanel
   private instructionList: InstructionList
+  private levelTitle: LevelTitle
   private memoryList: MemoryList
   private scorePanel: ScorePanel
   private backButton: BackButton
@@ -22,14 +24,14 @@ export class IngameHud {
   private instructionRunner: InstructionRunner
 
   constructor(
+    private levelLabel: string,
     private memoryStore: Store<MemoryShard[]>,
     private scoreStore: Store<number>,
     private instructionStore: Store<Instruction[]>,
     private resetCallback: () => Promise<void>,
     private eraseLastInstructionCallback: () => () => void,
     private clearCallback: () => () => void
-  ) {
-  }
+  ) { }
 
   create(levelConfig: LevelConfiguration, hero: Hero) {
     const availableInstructions = InstructionFactory(
@@ -37,6 +39,9 @@ export class IngameHud {
       levelConfig.availableInstructions
     )
     const availableInstructionStore = new Store<Instruction[]>(availableInstructions)
+
+    this.levelTitle = new LevelTitle(new Store<string>(this.levelLabel))
+    this.levelTitle.spawn()
 
     this.instructionPanel = new InstructionPanel(
       availableInstructionStore,
@@ -58,6 +63,7 @@ export class IngameHud {
   }
 
   destroy() {
+    this.levelTitle.destroy()
     this.memoryList.destroy()
     this.instructionList.destroy()
     this.instructionPanel.destroy()

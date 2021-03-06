@@ -14,15 +14,17 @@ export class Game {
   private hero: Hero
   private ingameHud: IngameHud
   private board: Board
-  private instructionStore = new Store<Instruction[]>([])
-  private memoryStore = new Store<MemoryShard[]>([])
-  private scoreStore = new Store<number>(0)
   private levelSelectionEntity: LevelSelectionEntity
   private levelList: LevelConfiguration[] = []
   private currentLevelIndex: number = 0
 
-  public loadLevel(levelConfig: LevelConfiguration): void {
+  constructor(
+    private instructionStore = new Store<Instruction[]>([]),
+    private memoryStore = new Store<MemoryShard[]>([]),
+    private scoreStore = new Store<number>(0),
+  ){}
 
+  public loadLevel(levelConfig: LevelConfiguration): void {
     const currentLevelIndex = this.levelIndexByName(levelConfig.name)
     if (currentLevelIndex != null) {
       this.currentLevelIndex = currentLevelIndex
@@ -40,7 +42,7 @@ export class Game {
   }
 
   public async toLevelSelection() {
-    this.unloadLevel()
+    await this.unloadLevel()
     this.levelSelectionEntity = new LevelSelectionEntity(
       new Store<LevelConfiguration[]>(this.levelList),
       level => {
@@ -89,6 +91,7 @@ export class Game {
 
   private createHud(levelConfig: LevelConfiguration) {
     this.ingameHud = new IngameHud(
+      levelConfig.label,
       this.memoryStore,
       this.scoreStore,
       this.instructionStore,

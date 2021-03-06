@@ -21,6 +21,7 @@ export class Entity {
   public destroy() {
     if (this.root) {
       this.onDestroy()
+      this.root.innerHTML = ""
       this.root.remove()
     }
   }
