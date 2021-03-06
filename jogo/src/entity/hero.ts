@@ -7,19 +7,19 @@ export class Hero extends Entity {
     private position: Vector,
   ) { super("hero") }
 
-  public rotateTo(degrees: number): Promise<void> {
-    return TransformRotate(this.root, degrees, 230)
+  public rotateTo(degrees: number, speed = 1): Promise<void> {
+    return TransformRotate(this.root, degrees, 200 / speed)
   }
 
-  public moveTo(position: Vector): Promise<void> {
+  public moveTo(position: Vector, speed = 1): Promise<void> {
     this.position = { ...position }
 
-    return AnimateElement(this.root, this.elementStyle(), 230)
+    return AnimateElement(this.root, this.elementStyle(), 230 / speed)
   }
 
-  public nudge(direction: number): Promise<void> {
+  public nudge(direction: number, speed = 1): Promise<void> {
     const modDirection = (direction % 360).toString()
-    return CustomAnimation(this.root, `hero-nudge-${modDirection}`, 200)
+    return CustomAnimation(this.root, `hero-nudge-${modDirection}`, 200 / speed)
   }
 
   protected get elementClassList() { return ['hero'] }

@@ -3,7 +3,7 @@ import { Hero } from '../hero'
 export type Instruction = {
   name: string,
   label: string,
-  action: () => Promise<any>,
+  action: (speed: number) => Promise<any>,
 }
 
 export const InstructionFactory = (hero: Hero, availableInstructions?: string[]): Instruction[] => {
@@ -14,47 +14,47 @@ export const InstructionFactory = (hero: Hero, availableInstructions?: string[])
     {
       name: 'move',
       label: 'Andar',
-      action: () => hero.moveForward()
+      action: (speed: number) => hero.moveForward(speed)
     },
     {
       name: 'turn_left',
       label: 'Girar pra esquerda',
-      action: () => hero.turnLeft()
+      action: (speed: number) => hero.turnLeft(speed)
     },
     {
       name: 'turn_right',
       label: 'Girar pra direita',
-      action: () => hero.turnRight()
+      action: (speed: number) => hero.turnRight(speed)
     },
     {
       name: 'say_yes',
       label: 'Dizer sim',
-      action: () => hero.sayYes()
+      action: (_speed: number) => hero.sayYes()
     },
     {
       name: 'say_no',
       label: 'Dizer não',
-      action: () => hero.sayNo()
+      action: (_speed: number) => hero.sayNo()
     },
     {
       name: 'read',
       label: 'Ler',
-      action: () => hero.read()
+      action: (_speed: number) => hero.read()
     },
     {
       name: 'say_memory',
       label: 'Falar',
-      action: () => hero.sayMemory()
+      action: (_speed: number) => hero.sayMemory()
     },
     {
       name: 'sum',
       label: 'Somar',
-      action: () => hero.sum()
+      action: (_speed: number) => hero.sum()
     },
     {
       name: 'subtract',
       label: 'Subtrair',
-      action: () => hero.subtract()
+      action: (_speed: number) => hero.subtract()
     },
   ].filter(filter)
 }

@@ -26,7 +26,7 @@ export class Hero {
     )
     this.memory = new Memory(memoryStore)
     this.entity.spawn()
-    this.rotateTo(this.initialDirection)
+    this.rotateTo(this.initialDirection, 1)
   }
 
   public async sayYes() {
@@ -37,30 +37,30 @@ export class Hero {
     await this.say("não")
   }
 
-  public async turnLeft() {
-    await this.rotate(-90)
+  public async turnLeft(speed: number) {
+    await this.rotate(-90, speed)
   }
 
-  public async turnRight() {
-    await this.rotate(90)
+  public async turnRight(speed: number) {
+    await this.rotate(90, speed)
   }
 
   public async reset() {
     this.memory.reset()
     await Promise.all([
-      this.rotateTo(this.initialDirection),
-      this.moveTo(this.initialPosition)
+      this.rotateTo(this.initialDirection, 1),
+      this.moveTo(this.initialPosition, 1)
     ])
   }
 
-  public async moveForward() {
+  public async moveForward(speed: number) {
     const dir = ToRadians(this.direction)
     const movement = {
       x: Math.round(Math.cos(dir)),
       y: Math.round(Math.sin(dir)),
     }
 
-    await this.move(movement)
+    await this.move(movement, speed)
     this.dispatchEventToBoard(BoardEvents.StepIn)
   }
 
@@ -122,27 +122,27 @@ export class Hero {
     this.dispatchEventToBoard(BoardEvents.Say, { message })
   }
 
-  private async rotate(direction: number) {
-    await this.rotateTo(this.direction + direction)
+  private async rotate(direction: number, speed: number) {
+    await this.rotateTo(this.direction + direction, speed)
   }
 
-  private async rotateTo(direction: number) {
+  private async rotateTo(direction: number, speed: number) {
     this.direction = direction
-    await this.entity.rotateTo(this.direction)
+    await this.entity.rotateTo(this.direction, speed)
   }
-  private async move(position: Vector) {
+  private async move(position: Vector, speed: number) {
     const moveTo = VectorSum(this.position, position)
-    await this.moveTo(moveTo)
+    await this.moveTo(moveTo, speed)
   }
 
-  private async moveTo(position: Vector) {
+  private async moveTo(position: Vector, speed: number) {
     if (!this.board.isPositionWalkable(position)) {
-      return this.entity.nudge(this.direction)
+      return this.entity.nudge(this.direction, speed)
     }
 
     this.position = {...position}
 
-    await this.entity.moveTo(this.realPosition)
+    await this.entity.moveTo(this.realPosition, speed)
   }
 
   private get realPosition() {

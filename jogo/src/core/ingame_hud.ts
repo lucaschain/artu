@@ -9,7 +9,7 @@ import { BackButton } from '../entity/hud/back_button'
 import { MemoryShard } from './memory'
 import { Hero } from './hero'
 import { LevelConfiguration } from './level_configuration'
-import { Instruction, InstructionFactory, RunInstructions } from './instruction'
+import { Instruction, InstructionFactory, InstructionRunner } from './instruction'
 
 export class IngameHud {
   private instructionPanel: InstructionPanel
@@ -19,6 +19,7 @@ export class IngameHud {
   private backButton: BackButton
   private shouldStop = false
   private isRunning = false
+  private instructionRunner: InstructionRunner
 
   constructor(
     private memoryStore: Store<MemoryShard[]>,
@@ -75,6 +76,9 @@ export class IngameHud {
   }
 
   private createInstructionList(availableInstructions: Instruction[]): InstructionList {
+    this.instructionRunner = new InstructionRunner(
+      availableInstructions
+    )
     const runInstructionsCallback = async (instructionList: string[]) => {
       if (this.isRunning) {
         return
@@ -82,8 +86,7 @@ export class IngameHud {
       this.isRunning = true
 
       await this.restart()
-      await RunInstructions(
-        availableInstructions,
+      await this.instructionRunner.runInstructions(
         instructionList,
         () => this.shouldStop
       )
