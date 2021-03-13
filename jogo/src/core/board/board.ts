@@ -3,9 +3,9 @@ import { Tile } from '../tile'
 import { Ground } from '../tile/type'
 import { Board as BoardEntity } from '../../entity/board'
 import { MemoryShard } from '../memory'
+import { TILE_SIZE } from '../../config'
 
 export class Board {
-  tileSize = 65
   private entity: BoardEntity
 
   constructor(
@@ -20,7 +20,6 @@ export class Board {
   public realPositionFor(tilePos: Vector): Vector {
     return RealPositionFor(
       tilePos,
-      this.tileSize
     )
   }
 
@@ -88,8 +87,8 @@ export class Board {
 
   private createBoardEntity(): void {
     this.entity = new BoardEntity(
-      this.columns * this.tileSize,
-      this.rows * this.tileSize,
+      this.columns * TILE_SIZE,
+      this.rows * TILE_SIZE,
     )
     this.entity.spawn()
   }
@@ -103,13 +102,12 @@ export class Board {
 
 export const RealPositionFor = (
   tilePos: Vector,
-  tileSize: number,
   origin: Vector = { x: 0.5, y: 0.5 },
 ): Vector => {
-  const xPos = tilePos.x * tileSize
-  const yPos = tilePos.y * tileSize
+  const xPos = tilePos.x * TILE_SIZE
+  const yPos = tilePos.y * TILE_SIZE
   return {
-    x: xPos + tileSize * origin.x,
-    y: yPos + tileSize * origin.y,
+    x: xPos + TILE_SIZE * origin.x,
+    y: yPos + TILE_SIZE * origin.y,
   }
 }

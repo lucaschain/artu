@@ -4,7 +4,7 @@ import { GameInstance }  from '../../core/game'
 
 export class BackButton extends Component<void> {
   protected get additionalElementClassList(): string[] {
-    return ['button']
+    return ['back-button']
   }
 
   render(): string {

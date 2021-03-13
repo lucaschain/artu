@@ -1,0 +1,23 @@
+.instruction-list {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto 0;
+  max-height: 50%;
+}
+
+.instruction-list ul {
+  height: 90%;
+  overflow-y: auto;
+}
+
+.instruction-list .controls {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.instruction-list .controls .control-button {
+  display: inline-block;
+}
+

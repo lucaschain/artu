@@ -1,8 +1,9 @@
 import { Vector } from '../../math/vector'
 import { Entity } from '../entity'
+import { TILE_SIZE } from '../../config'
 
 export class Tile extends Entity {
-  protected size = 65
+  protected size = TILE_SIZE
 
   constructor(protected position: Vector, protected _type: string) {
     super("tile")

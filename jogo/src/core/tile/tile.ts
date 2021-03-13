@@ -42,6 +42,6 @@ export abstract class Tile {
   protected abstract createEntity(): Entity
 
   protected get realPosition(): Vector {
-    return RealPositionFor(this.position, 65)
+    return RealPositionFor(this.position)
   }
 }

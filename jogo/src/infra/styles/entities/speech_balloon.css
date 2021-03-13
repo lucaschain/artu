@@ -6,13 +6,14 @@
   border: 1px solid #c0c0c0;
   border-radius: 4px;
   animation: 'speech-appear' 180ms;
-  font-size: 0.6rem;
+  font-size: 1rem;
   box-shadow: 0 3px 5px black;
   z-index: 2;
   transition: all ease-out 150ms;
   opacity: 0.6;
   user-select: none;
-  max-width: 75px;
+  max-width: 120px;
+  text-align: center;
 }
 
 .speech-balloon.priority:hover {
