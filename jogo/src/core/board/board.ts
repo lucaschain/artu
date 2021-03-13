@@ -54,6 +54,7 @@ export class Board {
   }
 
   public destroy() {
+    this.tiles.forEach((tile) => tile.destroy())
     this.entity.destroy()
   }
 
@@ -80,6 +81,7 @@ export class Board {
         let tile = (
           this.tileAtPosition({x, y}) || new Ground({ x, y })
         )
+        tile.reset()
         tile.create()
       }
     }

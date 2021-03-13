@@ -60,6 +60,8 @@ export class Game {
     if (this.nextLevel) {
       await this.unloadLevel()
       this.loadLevel(this.nextLevel)
+    } else {
+      await this.toLevelSelection()
     }
   }
 

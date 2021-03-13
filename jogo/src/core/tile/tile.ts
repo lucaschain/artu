@@ -31,6 +31,10 @@ export abstract class Tile {
 
   public reset() {}
 
+  public destroy() {
+    this.entity.destroy()
+  }
+
   protected get entity(): Entity {
     if (!this._entity) {
       this._entity = this.createEntity()

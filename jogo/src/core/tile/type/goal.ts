@@ -5,9 +5,14 @@ import { Tile as GoalEntity } from '../../../entity/tile'
 import { GameInstance }  from '../../game'
 
 export class Goal extends Tile {
-  used = false
+  private used = false
+
   protected createEntity(): Entity {
     return new GoalEntity(this.position, "goal")
+  }
+
+  public reset() {
+    this.used = false
   }
 
   public onHeroEvent(eventName: string, _eventData: Record<string, string>) {
