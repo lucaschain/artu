@@ -8,6 +8,7 @@ export class MemoryList extends Component<MemoryShard[]> {
   }
 
   render(memories: MemoryShard[]): string {
-    return template({ memories })
+    const orderedMemories = [...memories].reverse()
+    return template({ memories: orderedMemories })
   }
 }
