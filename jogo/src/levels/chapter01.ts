@@ -52,32 +52,4 @@ export const Chapter01: LevelConfiguration[] = [
       new Goal({x: 0, y: 4})
     ]
   },
-  {
-    name: 'chapter_01_level_005',
-    label: 'Espiral',
-    availableInstructions: ['move', 'turn_right'],
-    width: 7,
-    height: 7,
-    tiles: [
-      new Block({x: 0, y: 1}),
-      new Block({x: 1, y: 1}),
-      new Block({x: 2, y: 1}),
-      new Block({x: 3, y: 1}),
-      new Block({x: 4, y: 1}),
-      new Block({x: 5, y: 1}),
-      new Block({x: 5, y: 2}),
-      new Block({x: 1, y: 3}),
-      new Block({x: 2, y: 3}),
-      new Block({x: 3, y: 3}),
-      new Block({x: 5, y: 3}),
-      new Block({x: 1, y: 4}),
-      new Block({x: 5, y: 4}),
-      new Goal({x: 2, y: 4}),
-      new Block({x: 1, y: 5}),
-      new Block({x: 2, y: 5}),
-      new Block({x: 3, y: 5}),
-      new Block({x: 4, y: 5}),
-      new Block({x: 5, y: 5}),
-    ]
-  },
 ]

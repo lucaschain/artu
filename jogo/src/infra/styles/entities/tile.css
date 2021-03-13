@@ -1,15 +1,15 @@
 .tile {
-  background-color: #4976f2;
-  border: 1px solid #2926d2;
+  background-color: #189ad3;
+  border: 1px solid #107dac;
 }
 
 .tile--goal {
-  background: #a2f1c0;
+  background: #1ebbd7;
 }
 
 .tile--block {
-  background: black;
-  border-color: black;
+  background: #005073;
+  border-color: #005073;
 }
 
 .tile--gate::after {
@@ -17,13 +17,14 @@
   margin: auto;
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  left: -1px;
+  width: 102%;
   bottom: 0;
   height: 20%;
   display: block;
   transition: width ease-out 220ms;
-  background: #2926d2;
+  background: #005073;
+  border-color: #005073;
 }
 
 .tile--gate.open::after {
@@ -41,7 +42,7 @@
   bottom: 0;
   height: 50%;
   display: block;
-  background: #a2f1c0;
+  background: #1ebbd7;
   border-radius: 100%;
 }
 

@@ -4,17 +4,19 @@
   right: 0;
   margin: auto 0;
   max-height: 50%;
-}
-
-.instruction-list ul {
-  height: 90%;
-  overflow-y: auto;
+  padding: 10px;
+  border-radius: 10px 0px 0px 10px;
+  overflow: hidden;
 }
 
 .instruction-list .controls {
   position: absolute;
-  bottom: 10px;
+  bottom: 0px;
   left: 10px;
+  background-color: #107dac;
+  width: 90%;
+  padding: 3px 3px 9px 3px;
+  text-align: right;
 }
 
 .instruction-list .controls .control-button {

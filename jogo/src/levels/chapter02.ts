@@ -48,7 +48,7 @@ export const Chapter02: LevelConfiguration[] = [
     startPosition: { x: 5, y: 2 },
     startDirection: Direction.WEST,
     tiles: [
-      new SpeechListener({x: 0, y: 0}, 'responda sim', 'sim', 'gate-1'),
+      new SpeechListener({x: 0, y: 0}, 'responda "sim"', 'sim', 'gate-1'),
       new Block({x: 0, y: 1}),
       new Goal({x: 0, y: 2}),
       new Gate({x: 0, y: 3}, 'gate-2', 'horizontal'),
@@ -56,7 +56,7 @@ export const Chapter02: LevelConfiguration[] = [
       new Block({x: 1, y: 2}),
       new Block({x: 1, y: 3}),
       new Block({x: 2, y: 1}),
-      new SpeechListener({x: 2, y: 2}, 'responda nao', 'não', 'gate-2'),
+      new SpeechListener({x: 2, y: 2}, 'responda "não"', 'não', 'gate-2'),
       new Block({x: 2, y: 3}),
       new Block({x: 3, y: 1}),
       new Gate({x: 3, y: 2}, 'gate-1'),

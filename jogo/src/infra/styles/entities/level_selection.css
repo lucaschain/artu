@@ -4,8 +4,10 @@
   right: 0;
   bottom: 0;
   margin: auto;
-  max-width: 400px;
+  max-width: 600px;
   max-height: 500px;
+  border-radius: 10px;
+  padding: 13px;
 }
 
 .level-selection ul {
@@ -20,14 +22,14 @@
 
 .level-selection li {
   cursor: pointer;
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   padding: 10px;
   font-size: 1rem;
-  background: white;
+  background: #71c7ec;
   margin: 5px;
   text-align: center;
-  line-height: 100px;
+  line-height: 120px;
 }
 
 .level-selection li.level-state-0 {
@@ -36,7 +38,7 @@
 }
 
 .level-selection li.level-state-2 {
-  background-color: #8bf9b5;
+  background-color: #1ebbd7;
 }
 
 .level-selection span {

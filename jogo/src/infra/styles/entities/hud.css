@@ -1,7 +1,11 @@
 .hud-panel {
-  background-color: grey;
+  background-color: #107dac;
   user-select: none;
   padding: 7px;
+}
+
+.hud-panel strong, h1 {
+  color: whitesmoke;
 }
 
 .clickable {
@@ -21,11 +25,23 @@
   top: 0;
   bottom: 0;
   right: left;
+  padding: 10px;
   margin: auto 0;
   min-width: 200px;
   max-height: 50%;
+  border-radius: 0px 10px 10px 0px;
 }
 
 .back-button {
   top: 4em;
+}
+
+.dark-scrollable-container {
+  height: 80%;
+  overflow-y: auto;
+  background: #002537;
+  color: #71c7ec;
+  padding: 5px 5px 25px 9px;
+  margin: 10px 0;
+  border-radius: 4px;
 }
