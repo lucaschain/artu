@@ -26,7 +26,6 @@ export class InstructionRunner {
         const isSameInstruction = lastRan && (lastRan.name === instruction.name)
 
         const speed = isSameInstruction && stillSameAsBefore ? 2 : 1
-        console.log(speed, instruction.name, this.lastInstructionsRan, index)
         await instruction.action(speed)
         instructionsRan.push(instruction)
       }
