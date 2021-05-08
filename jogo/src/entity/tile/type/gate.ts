@@ -1,10 +1,12 @@
 import { Vector } from '../../../math/vector'
 import { Tile } from '../tile'
 
+export type GateOrientation = "vertical" | "horizontal"
+
 export class Gate extends Tile {
   constructor(
     protected position: Vector,
-    private orientation: string = "vertical"
+    private orientation: GateOrientation = "vertical"
   ) { super(position, "gate") }
 
   public open() {

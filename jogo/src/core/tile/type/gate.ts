@@ -1,6 +1,6 @@
 import { Tile } from '../tile'
 import { Vector } from '../../../math/vector'
-import { Gate as GateEntity } from '../../../entity/tile'
+import { Gate as GateEntity, GateOrientation } from '../../../entity/tile'
 
 export class Gate extends Tile {
   private isOpen = false
@@ -8,7 +8,7 @@ export class Gate extends Tile {
   constructor(
     position: Vector,
     id = '',
-    private orientation = 'vertical'
+    private orientation: GateOrientation = 'vertical'
   ) {
     super(position, id)
   }
