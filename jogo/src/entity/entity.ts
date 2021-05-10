@@ -48,7 +48,7 @@ export class Entity {
     return document.body
   }
 
-  private createElement(): HTMLDivElement {
+  protected createElement(): HTMLDivElement {
     return Div({
       classList: ['entity', ...this.elementClassList],
       style: this.elementStyle()

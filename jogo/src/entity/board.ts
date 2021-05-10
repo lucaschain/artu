@@ -1,3 +1,4 @@
+import { Div } from '../infra/dom'
 import { Entity } from './entity'
 
 export class Board extends Entity {
@@ -11,5 +12,19 @@ export class Board extends Entity {
       width: `${this.width}px`,
       height: `${this.height}px`
     }
+  }
+
+  protected createElement(): HTMLDivElement {
+    const outerDiv = Div({
+      classList: ['entity', 'board-container'],
+    })
+
+    const board = Div({
+      classList: ['entity', ...this.elementClassList],
+      style: this.elementStyle()
+    })
+    outerDiv.append(board)
+
+    return outerDiv
   }
 }

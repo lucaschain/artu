@@ -28,9 +28,9 @@ export class Board {
       return false
     }
 
-    const tileInPosition = this.tileAtPosition(position)
+    const tileAtPosition = this.tileAtPosition(position)
 
-    return (tileInPosition) ? tileInPosition.walkable : true
+    return (tileAtPosition) ? tileAtPosition.walkable : true
   }
 
   public shardInPosition(position: Vector): MemoryShard {
@@ -78,7 +78,7 @@ export class Board {
   private createTiles(): void {
     for (let x = 0; x < this.columns; x++) {
       for (let y = 0; y < this.rows; y++) {
-        let tile = (
+        const tile = (
           this.tileAtPosition({x, y}) || new Ground({ x, y })
         )
         tile.reset()
@@ -95,7 +95,7 @@ export class Board {
     this.entity.spawn()
   }
 
-  private tileAtPosition?(pos: Vector): Tile {
+  private tileAtPosition?(pos: Vector): Tile | null {
     return this.tiles.filter(tile => {
       return tile.position.x === pos.x && tile.position.y === pos.y
     })[0]
