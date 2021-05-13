@@ -9,10 +9,12 @@ import { Hero } from './hero'
 import { IngameHud } from './ingame_hud'
 import { Instruction } from './instruction'
 import { LevelSelection as LevelSelectionEntity } from '../entity/hud/level_selection'
+import { Modal } from './modal'
 
 export class Game {
   private hero: Hero
   private ingameHud: IngameHud
+  private modal: Modal
   private board: Board
   private levelSelectionEntity: LevelSelectionEntity
   private levelList: LevelConfiguration[] = []
@@ -28,6 +30,10 @@ export class Game {
     const currentLevelIndex = this.levelIndexByName(levelConfig.name)
     if (currentLevelIndex != null) {
       this.currentLevelIndex = currentLevelIndex
+    }
+
+    if (levelConfig.modal) {
+      this.createModal(levelConfig.modal)
     }
 
     this.board = new Board(
@@ -102,6 +108,11 @@ export class Game {
       this.clear.bind(this),
     )
     this.ingameHud.create(levelConfig, this.hero)
+  }
+
+  private createModal(templateName: string) {
+    this.modal = new Modal(templateName)
+    this.modal.create()
   }
 
   private get currentLevel(): LevelConfiguration {
