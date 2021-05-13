@@ -7,6 +7,7 @@ export const Chapter01: LevelConfiguration[] = [
     name: 'chapter_01_level_001',
     label: 'Olá, mundo!',
     availableInstructions: ['move'],
+    modal: 'back_button',
     width: 3,
     height: 1,
     tiles: [

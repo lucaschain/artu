@@ -1,0 +1,20 @@
+.modal-skeleton {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(0 0 0 / 80%);
+}
+
+.modal-skeleton--content {
+  width: 80%;
+  padding: 50px;
+  margin: auto;
+  background-color: #fff;
+
+}
