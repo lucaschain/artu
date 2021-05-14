@@ -23,6 +23,28 @@ describe('Integration | Core | Game', () => {
     })
   })
 
+  describe('Ao carregar um level com modal associado usando game.loadLevel', () => {
+    it('um modal deve aparecer com o conteúdo correto', () => {
+      const game = new Game()
+      const levelConfig = CreateLevelConfiguration(
+        'foo_dummy',
+        'Nivel básico de testes',
+        [],
+        2,
+        2,
+        [],
+        'modal_level/level_1_instructions'
+      )
+
+      game.loadLevel(levelConfig)
+
+      const container = document.body.querySelector('.modal-skeleton')
+
+      expect(container).toBeTruthy()
+      expect(container.textContent).toContain('Level 1 - Instructions')
+    })
+  })
+
   describe('Ao voltar para a seleção de níveis usando game.toLevelSelection', () => {
     it('a seleção de nível aparecer contendo os níveis registrados', async () => {
       const game = new Game()
