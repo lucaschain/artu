@@ -110,9 +110,13 @@ export class Game {
     this.ingameHud.create(levelConfig, this.hero)
   }
 
-  private createModal(templateName: string) {
+  public createModal(templateName: string) {
     this.modal = new Modal(templateName)
     this.modal.create()
+  }
+
+  public destroyModal() {
+    this.modal.destroy();
   }
 
   private get currentLevel(): LevelConfiguration {

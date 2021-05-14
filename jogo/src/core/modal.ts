@@ -9,4 +9,8 @@ export class Modal {
     this.skeleton = new ModalSkeleton(new Store<string>(this.templateName))
     this.skeleton.spawn()
   }
+
+  destroy(): void {
+    this.skeleton.destroy()
+  }
 }
