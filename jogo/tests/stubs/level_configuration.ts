@@ -8,6 +8,7 @@ export const CreateLevelConfiguration = (
   width = 2,
   height = 2,
   availableInstructions: string[] = [],
+  modal = ''
 ): LevelConfiguration => {
   return {
     name,
@@ -16,5 +17,6 @@ export const CreateLevelConfiguration = (
     width,
     height,
     availableInstructions,
+    modal
   }
 }

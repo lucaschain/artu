@@ -9,6 +9,7 @@ export type LevelConfiguration = {
   width: number,
   height: number,
   availableInstructions: string[],
+  modal?: string,
   startPosition?: Vector,
   startDirection?: Direction,
 }
